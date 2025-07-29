@@ -48,10 +48,6 @@ const Projects: React.FC = () => {
       title: 'Digital Games Store - DigitalDeluxes',
       description: 'Sitio web para la venta de videojuegos digitales desarrollado en PHP puro y MySQL, con consumo de APIs de Kinguin e integración de múltiples pasarelas de pago.',
       image: 'https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      description: 'Sitio web multipropósito desarrollado en CodeIgniter (PHP + MySQL) para la promoción y gestión de servicios SMM. Incluye consumo de APIs de proveedores e integración de múltiples pasarelas de pago.',
-      image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      tech: ['CodeIgniter', 'PHP', 'MySQL', 'SMM APIs', 'Payment Gateways'],
-      demoUrl: 'https://1popularity.com',
       githubUrl: '',
       featured: true,
     },
@@ -148,22 +144,16 @@ const Projects: React.FC = () => {
                   </div>
                   
                   <div className="flex flex-wrap gap-2">
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors text-white"
-                    >
-                      Live Demo
-                    </a>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm px-4 py-2 rounded-lg border border-slate-700 hover:border-slate-600 transition-colors"
-                    >
-                      View Code
-                    </a>
+                    {project.demoUrl && (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors text-white"
+                      >
+                        Live Demo
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -234,22 +224,16 @@ const Projects: React.FC = () => {
               </div>
               
               <div className="flex flex-wrap gap-4">
-                <a
-                  href={selectedProject.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary"
-                >
-                  Live Demo
-                </a>
-                <a
-                  href={selectedProject.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-secondary"
-                >
-                  View Code
-                </a>
+                {selectedProject.demoUrl && (
+                  <a
+                    href={selectedProject.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary"
+                  >
+                    Live Demo
+                  </a>
+                )}
               </div>
             </div>
           </motion.div>
