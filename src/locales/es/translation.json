@@ -1,0 +1,112 @@
+{
+  "header": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "stack": "Tecnologías",
+    "projects": "Proyectos",
+    "contact": "Contacto",
+    "downloadCV": "Descargar CV"
+  },
+  "hero": {
+    "name": "Brandon",
+    "lastName": "Landaetta",
+    "title": "Ingeniero de Software",
+    "description": "Construyendo soluciones escalables y elegantes que empoderan a los usuarios y transforman negocios.",
+    "downloadCV": "Descargar CV",
+    "viewProjects": "Ver Proyectos",
+    "scrollDown": "Desplázate hacia abajo"
+  },
+  "about": {
+    "title": "Acerca de Mí",
+    "description1": "Soy un ingeniero de software apasionado con más de 5 años de experiencia construyendo aplicaciones web modernas y centradas en el usuario. Me especializo en crear interfaces elegantes y eficientes que resuelven problemas reales.",
+    "description2": "Mi enfoque combina excelencia técnica con empatía hacia el usuario, asegurando que las soluciones no solo sean técnicamente sólidas sino también intuitivas y accesibles para todos los usuarios.",
+    "description3": "Estoy constantemente aprendiendo y explorando nuevas tecnologías, con un enfoque en optimización de rendimiento, arquitectura de componentes y sistemas de diseño.",
+    "yearsExperience": "Años de Experiencia",
+    "projects": "Proyectos",
+    "techStack": "Stack Tecnológico",
+    "timeline": "Cronología de Experiencia",
+    "positions": {
+      "intern": "Practicante de Desarrollo de Software",
+      "fullstack": "Desarrollador Full Stack",
+      "freelance": "Freelance",
+      "analyst": "Analista de Software",
+      "junior": "Desarrollador Junior",
+      "trainee": "Aprendiz de Técnico en TI"
+    },
+    "descriptions": {
+      "intern": "Diseñé y mantuve aplicaciones web y de escritorio en C# y ASP .NET, mejorando la funcionalidad y los procesos de soporte. Realicé ajustes de rendimiento y optimización de bases de datos para Microsoft SQL Server, reduciendo los tiempos de consulta hasta en un 30%. Proporcioné soporte técnico y capacitación a usuarios finales, asegurando una adopción fluida de las soluciones de software.",
+      "fullstack": "Participé en el desarrollo e implementación de módulos internos para sistemas de gestión de inventario y control de iluminación, utilizando ASP.NET Core, C# y SQL Server. Construí interfaces web dinámicas con Angular y TypeScript, enfocándome en optimizar la experiencia del usuario. Integré servicios REST y autenticación JWT para garantizar la seguridad en los procesos de acceso a la plataforma. Colaboré en la migración de sistemas legacy a arquitecturas más escalables, aplicando principios SOLID y mejores prácticas de Clean Architecture.",
+      "freelance": "Como desarrollador full-stack freelance versátil y emprendedor digital, he arquitecturado y entregado plataformas de e-commerce y aplicaciones web—vendiendo productos digitales y servicios de consultoría—usando PHP (Laravel, CodeIgniter) y Python (Flask), con front-ends responsivos construidos en HTML5, Tailwind CSS y Vue.js/React; he desplegado y gestionado estas soluciones en Google Cloud Platform y hosting cPanel, automatizado CI/CD con Azure Pipelines y GitHub Actions, e implementado scripts ETL y de análisis basados en Python para asegurar tiempos de respuesta sub-200 ms, 99.5%+ de uptime, y experiencias de usuario fluidas y basadas en datos.",
+      "analyst": "Diseñé y mantuve aplicaciones web y de escritorio en C# y ASP .NET, mejorando la funcionalidad y los procesos de soporte. Realicé ajustes de rendimiento y optimización de bases de datos para Microsoft SQL Server, reduciendo los tiempos de consulta hasta en un 30%. Proporcioné soporte técnico y capacitación a usuarios finales, asegurando una adopción fluida de las soluciones de software.",
+      "junior": "Desarrollé aplicaciones de punto de venta para criptomonedas en C# y ASP .NET, integrando componentes de hardware y pasarelas de pago. Colaboré en el diseño e implementación de APIs para procesamiento seguro de transacciones. Participé en revisiones de código y establecí prácticas de pruebas unitarias para mejorar la calidad del código.",
+      "trainee": "Apoyé el mantenimiento del sistema AS/400 y monitoreo de rendimiento para campañas de precios y postventa. Asistí en la gestión de datos y reportes, usando consultas DB2 para informar decisiones de negocio. Coordiné con equipos multifuncionales para solucionar problemas técnicos y optimizar flujos de trabajo operacionales."
+    }
+  },
+  "stack": {
+    "title": "Stack Tecnológico",
+    "categories": {
+      "all": "Todas",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Base de Datos",
+      "devops": "DevOps"
+    }
+  },
+  "projects": {
+    "title": "Proyectos Destacados",
+    "viewMore": "Ver Más en GitHub",
+    "projects": {
+      "bitcoinATM": {
+        "title": "Software de Cajero Bitcoin",
+        "description": "Software tipo cajero automático desarrollado en C# y SQL usando web-forms, consumiendo API de CoinPayments para transacciones de criptomonedas."
+      },
+      "aiRetail": {
+        "title": "Sistema de Recomendaciones IA para Retail - Módulo \"Solo para Ti\"",
+        "description": "Sistema personalizado de recomendaciones en retail con IA utilizando algoritmos de machine learning para mejorar la experiencia del cliente (Node.js + React + Python + Teradata)."
+      },
+      "enterpriseProjects": {
+        "title": "Varios Proyectos Empresariales",
+        "description": "Apoyo y desarrollo en proyectos basados en Angular, C#, .NET, SQL, MVC y tecnologías PROXY. Diversos proyectos completados en diferentes empresas usando tecnologías de nivel empresarial."
+      },
+      "aiReports": {
+        "title": "Sistema de Reportes Automatizados con IA",
+        "description": "Sistema personalizado para la creación de informes automáticos, integrado con IA generativa usando APIs y servicios de Google Cloud en Python y SQL (Cloud Run, Gemini, Storage, BigQuery)."
+      },
+      "digitalGames": {
+        "title": "Tienda de Juegos Digitales - DigitalDeluxes",
+        "description": "Sitio web de venta de videojuegos digitales desarrollado en PHP puro y MySQL, con consumo de API de Kinguin e integración de múltiples pasarelas de pago (Coinpal, Payeer, Wompi, MercadoPago)."
+      },
+      "smmPlatform": {
+        "title": "Plataforma de Servicios SMM - 1popularity",
+        "description": "Sitio web multipropósito desarrollado en CodeIgniter (PHP + MySQL) para la promoción y gestión de servicios SMM. Incluye consumo de APIs de proveedores e integración de múltiples pasarelas de pago."
+      }
+    },
+    "liveDemo": "Demo en Vivo"
+  },
+  "contact": {
+    "title": "Ponte en Contacto",
+    "subtitle": "Conectemos",
+    "description": "Siempre estoy abierto a discutir nuevos proyectos, ideas creativas u oportunidades para ser parte de tu visión. No dudes en contactarme usando el formulario o conectar conmigo en redes sociales.",
+    "sendMessage": "Enviar un Mensaje",
+    "form": {
+      "name": "Tu Nombre",
+      "email": "Tu Email",
+      "subject": "Asunto",
+      "message": "Mensaje",
+      "namePlaceholder": "Juan Pérez",
+      "emailPlaceholder": "juan@ejemplo.com",
+      "subjectPlaceholder": "Consulta de Proyecto",
+      "messagePlaceholder": "Cuéntame sobre tu proyecto...",
+      "sendButton": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "success": "¡Tu mensaje ha sido enviado exitosamente!",
+      "error": "Algo salió mal. Por favor intenta de nuevo más tarde."
+    }
+  },
+  "footer": {
+    "description": "Construyendo soluciones elegantes, escalables y centradas en el usuario con tecnologías web modernas.",
+    "quickLinks": "Enlaces Rápidos",
+    "backToTop": "Volver arriba",
+    "copyright": "Todos los derechos reservados."
+  }
+}

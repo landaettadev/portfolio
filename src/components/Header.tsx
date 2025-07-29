@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,48 +16,20 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const translatePage = (targetLang: string) => {
-    const currentUrl = encodeURIComponent(window.location.href);
-    const pageLang = document.documentElement.lang || 'en';
-    window.location.href = `https://translate.google.com/translate?sl=${pageLang}&tl=${targetLang}&u=${currentUrl}`;
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
   };
-
-  const languages = [
-    { code: 'en', label: 'EN' },
-    { code: 'es', label: 'ES' },
-    { code: 'fr', label: 'FR' },
-    { code: 'de', label: 'DE' },
-    { code: 'zh', label: '中文' },
-    { code: 'ja', label: '日本語' },
-  ];
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const toggleLangMenu = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsLangMenuOpen(!isLangMenuOpen);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      const langSwitcher = document.getElementById('lang-switcher');
-      if (langSwitcher && !langSwitcher.contains(e.target as Node)) {
-        setIsLangMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, []);
-
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Stack', href: '#stack' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+    { name: t('header.home'), href: '#home' },
+    { name: t('header.about'), href: '#about' },
+    { name: t('header.stack'), href: '#stack' },
+    { name: t('header.projects'), href: '#projects' },
+    { name: t('header.contact'), href: '#contact' },
   ];
 
   return (
@@ -86,30 +59,27 @@ const Header: React.FC = () => {
           ))}
           
           {/* Language Switcher */}
-          <div id="lang-switcher" className="relative">
+          <div className="flex items-center gap-2">
             <button
-              onClick={toggleLangMenu}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800 text-text-main hover:bg-slate-700 transition-colors"
-              aria-label="Select language"
+              onClick={() => changeLanguage('en')}
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                i18n.language === 'en'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-slate-800 text-text-main hover:bg-slate-700'
+              }`}
             >
-              <Globe size={16} />
-              <span className="text-sm">EN</span>
+              EN
             </button>
-            
-            {isLangMenuOpen && (
-              <div className="absolute right-0 mt-2 py-2 w-32 bg-slate-800 rounded-lg shadow-xl border border-slate-700">
-                {languages.map((lang) => (
-                  <button
-                    key={lang.code}
-                    onClick={() => translatePage(lang.code)}
-                    className="w-full px-4 py-2 text-left text-sm text-text-main hover:bg-slate-700 transition-colors"
-                    aria-label={`Translate to ${lang.label}`}
-                  >
-                    {lang.label}
-                  </button>
-                ))}
-              </div>
-            )}
+            <button
+              onClick={() => changeLanguage('es')}
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                i18n.language === 'es'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-slate-800 text-text-main hover:bg-slate-700'
+              }`}
+            >
+              ES
+            </button>
           </div>
 
           <a
@@ -118,36 +88,34 @@ const Header: React.FC = () => {
             rel="noopener noreferrer"
             className="px-4 py-2 rounded-lg font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 transition-all duration-300 text-sm"
           >
-            Download CV
+            {t('header.downloadCV')}
           </a>
         </nav>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-4">
           {/* Mobile Language Switcher */}
-          <div id="mobile-lang-switcher" className="relative">
+          <div className="flex items-center gap-1">
             <button
-              onClick={toggleLangMenu}
-              className="flex items-center gap-1 px-2 py-2 rounded-lg bg-slate-800 text-text-main hover:bg-slate-700 transition-colors"
-              aria-label="Select language"
+              onClick={() => changeLanguage('en')}
+              className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
+                i18n.language === 'en'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-slate-800 text-text-main hover:bg-slate-700'
+              }`}
             >
-              <Globe size={16} />
+              EN
             </button>
-            
-            {isLangMenuOpen && (
-              <div className="absolute right-0 mt-2 py-2 w-32 bg-slate-800 rounded-lg shadow-xl border border-slate-700">
-                {languages.map((lang) => (
-                  <button
-                    key={lang.code}
-                    onClick={() => translatePage(lang.code)}
-                    className="w-full px-4 py-2 text-left text-sm text-text-main hover:bg-slate-700 transition-colors"
-                    aria-label={`Translate to ${lang.label}`}
-                  >
-                    {lang.label}
-                  </button>
-                ))}
-              </div>
-            )}
+            <button
+              onClick={() => changeLanguage('es')}
+              className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
+                i18n.language === 'es'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-slate-800 text-text-main hover:bg-slate-700'
+              }`}
+            >
+              ES
+            </button>
           </div>
 
           <button
@@ -184,7 +152,7 @@ const Header: React.FC = () => {
             className="px-4 py-2 rounded-lg font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 transition-all duration-300 text-center mt-2"
             onClick={() => setIsMenuOpen(false)}
           >
-            Download CV
+            {t('header.downloadCV')}
           </a>
         </div>
       </div>
