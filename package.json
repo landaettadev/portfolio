@@ -1,16 +1,10 @@
 {
-<<<<<<< HEAD
   "name": "brandon-landaetta-portfolio",
   "private": true,
   "version": "1.0.0",
   "description": "Brandon Landaetta's Software Engineer Portfolio - A modern, responsive portfolio with AI assistant",
   "author": "Brandon Landaetta <brandon@landaetta.dev>",
   "homepage": "https://brandonlandaetta.dev",
-=======
-  "name": "developer-portfolio",
-  "private": true,
-  "version": "1.0.0",
->>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
   "type": "module",
   "scripts": {
     "dev": "vite",
