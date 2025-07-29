@@ -1,7 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   
   const scrollToTop = () => {
@@ -22,7 +24,7 @@ const Footer: React.FC = () => {
               <span className="font-bold text-xl">Dev<span className="text-gradient">Port</span></span>
             </div>
             <p className="text-text-muted mb-6">
-              Building elegant, scalable, and user-focused solutions with modern web technologies.
+              {t('footer.description')}
             </p>
             <div className="flex gap-4">
               <a
@@ -55,25 +57,25 @@ const Footer: React.FC = () => {
           
           {/* Quick Links */}
           <div className="md:col-span-2">
-            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-bold mb-4">{t('footer.quickLinks')}</h3>
             <div className="grid grid-cols-2 gap-4">
               <ul className="space-y-2">
                 <li>
-                  <a href="#home" className="text-text-muted hover:text-text-main transition-colors">Home</a>
+                  <a href="#home" className="text-text-muted hover:text-text-main transition-colors">{t('header.home')}</a>
                 </li>
                 <li>
-                  <a href="#about" className="text-text-muted hover:text-text-main transition-colors">About</a>
+                  <a href="#about" className="text-text-muted hover:text-text-main transition-colors">{t('header.about')}</a>
                 </li>
                 <li>
-                  <a href="#stack" className="text-text-muted hover:text-text-main transition-colors">Tech Stack</a>
+                  <a href="#stack" className="text-text-muted hover:text-text-main transition-colors">{t('header.stack')}</a>
                 </li>
               </ul>
               <ul className="space-y-2">
                 <li>
-                  <a href="#projects" className="text-text-muted hover:text-text-main transition-colors">Projects</a>
+                  <a href="#projects" className="text-text-muted hover:text-text-main transition-colors">{t('header.projects')}</a>
                 </li>
                 <li>
-                  <a href="#contact" className="text-text-muted hover:text-text-main transition-colors">Contact</a>
+                  <a href="#contact" className="text-text-muted hover:text-text-main transition-colors">{t('header.contact')}</a>
                 </li>
               </ul>
             </div>
@@ -84,7 +86,7 @@ const Footer: React.FC = () => {
         
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-text-muted text-sm mb-4 md:mb-0">
-            &copy; {currentYear} Brandon Landaetta. All rights reserved.
+            &copy; {currentYear} Brandon Landaetta. {t('footer.copyright')}
           </p>
           
           <button
@@ -92,7 +94,7 @@ const Footer: React.FC = () => {
             className="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 text-text-muted hover:bg-slate-700 hover:text-text-main transition-all"
             aria-label="Back to top"
           >
-            <span>Back to top</span>
+            <span>{t('footer.backToTop')}</span>
             <ArrowUp size={16} />
           </button>
         </div>

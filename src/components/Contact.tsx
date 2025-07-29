@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useTranslation } from 'react-i18next';
 import { Send, Github, Linkedin, Instagram, Mail } from 'lucide-react';
 
 const Contact: React.FC = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -83,7 +85,7 @@ const Contact: React.FC = () => {
   return (
     <section id="contact" className="section bg-bg-primary" ref={sectionRef}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-        <h2 className="section-title text-center sm:text-left">Get In Touch</h2>
+        <h2 className="section-title text-center sm:text-left">{t('contact.title')}</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 mt-8 sm:mt-12">
           <motion.div
@@ -95,14 +97,14 @@ const Contact: React.FC = () => {
               className="text-lg sm:text-xl font-bold mb-4 sm:mb-6"
               variants={itemVariants}
             >
-              Let's Connect
+              {t('contact.subtitle')}
             </motion.h3>
             
             <motion.p 
               className="text-sm sm:text-base text-text-muted mb-6 sm:mb-8"
               variants={itemVariants}
             >
-              I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision. Feel free to reach out using the form or connect with me on social media.
+              {t('contact.description')}
             </motion.p>
             
             <motion.div 
@@ -148,7 +150,7 @@ const Contact: React.FC = () => {
               className="text-lg sm:text-xl font-bold mb-4 sm:mb-6"
               variants={itemVariants}
             >
-              Send a Message
+              {t('contact.sendMessage')}
             </motion.h3>
             
             <motion.form 
@@ -159,7 +161,7 @@ const Contact: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-text-muted mb-1">
-                    Your Name
+                    {t('contact.form.name')}
                   </label>
                   <input
                     type="text"
@@ -169,13 +171,13 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-slate-800 border-none text-sm sm:text-base text-text-main placeholder:text-text-muted focus:ring-2 focus:ring-blue-500"
-                    placeholder="John Doe"
+                    placeholder={t('contact.form.namePlaceholder')}
                   />
                 </div>
                 
                 <div>
                   <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-text-muted mb-1">
-                    Your Email
+                    {t('contact.form.email')}
                   </label>
                   <input
                     type="email"
@@ -185,14 +187,14 @@ const Contact: React.FC = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-slate-800 border-none text-sm sm:text-base text-text-main placeholder:text-text-muted focus:ring-2 focus:ring-blue-500"
-                    placeholder="john@example.com"
+                    placeholder={t('contact.form.emailPlaceholder')}
                   />
                 </div>
               </div>
               
               <div>
                 <label htmlFor="subject" className="block text-xs sm:text-sm font-medium text-text-muted mb-1">
-                  Subject
+                  {t('contact.form.subject')}
                 </label>
                 <input
                   type="text"
@@ -202,13 +204,13 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-slate-800 border-none text-sm sm:text-base text-text-main placeholder:text-text-muted focus:ring-2 focus:ring-blue-500"
-                  placeholder="Project Inquiry"
+                  placeholder={t('contact.form.subjectPlaceholder')}
                 />
               </div>
               
               <div>
                 <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-text-muted mb-1">
-                  Message
+                  {t('contact.form.message')}
                 </label>
                 <textarea
                   id="message"
@@ -218,7 +220,7 @@ const Contact: React.FC = () => {
                   required
                   rows={4}
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-slate-800 border-none text-sm sm:text-base text-text-main placeholder:text-text-muted focus:ring-2 focus:ring-blue-500 resize-none"
-                  placeholder="Tell me about your project..."
+                  placeholder={t('contact.form.messagePlaceholder')}
                 ></textarea>
               </div>
               
@@ -232,11 +234,11 @@ const Contact: React.FC = () => {
                 {formStatus === 'submitting' ? (
                   <>
                     <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></span>
-                    Sending...
+                    {t('contact.form.sending')}
                   </>
                 ) : (
                   <>
-                    Send Message
+                    {t('contact.form.sendButton')}
                     <Send size={18} />
                   </>
                 )}
@@ -244,13 +246,13 @@ const Contact: React.FC = () => {
               
               {formStatus === 'success' && (
                 <div className="p-3 sm:p-4 rounded-lg bg-green-500/20 text-green-400 text-sm sm:text-base flex items-center justify-center">
-                  Your message has been sent successfully!
+                  {t('contact.form.success')}
                 </div>
               )}
               
               {formStatus === 'error' && (
                 <div className="p-3 sm:p-4 rounded-lg bg-red-500/20 text-red-400 text-sm sm:text-base flex items-center justify-center">
-                  Something went wrong. Please try again later.
+                  {t('contact.form.error')}
                 </div>
               )}
             </motion.form>
