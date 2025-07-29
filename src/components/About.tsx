@@ -113,11 +113,11 @@ const About: React.FC = () => {
                 <span className="text-sm text-text-muted mt-2">Years Experience</span>
               </div>
               <div className="card flex flex-col items-center p-4">
-                <span className="text-2xl font-bold text-gradient">30+</span>
+                <span className="text-2xl font-bold text-gradient">15+</span>
                 <span className="text-sm text-text-muted mt-2">Projects</span>
               </div>
               <div className="card flex flex-col items-center p-4">
-                <span className="text-2xl font-bold text-gradient">15+</span>
+                <span className="text-2xl font-bold text-gradient">20+</span>
                 <span className="text-sm text-text-muted mt-2">Tech Stack</span>
               </div>
             </div>
