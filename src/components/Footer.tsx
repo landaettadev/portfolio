@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUp, Github, Linkedin, Instagram, Mail } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex gap-4">
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/landaettadev"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-text-muted hover:text-text-main transition-colors"
@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
                 <Github size={20} />
               </a>
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://www.linkedin.com/in/brandon-landaetta-70340ba2/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-text-muted hover:text-text-main transition-colors"
@@ -44,16 +44,7 @@ const Footer: React.FC = () => {
                 <Linkedin size={20} />
               </a>
               <a
-                href="https://instagram.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-text-muted hover:text-text-main transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram size={20} />
-              </a>
-              <a
-                href="mailto:your.email@example.com"
+                href="mailto:brandon@landaetta.dev"
                 className="text-text-muted hover:text-text-main transition-colors"
                 aria-label="Email"
               >
@@ -62,45 +53,33 @@ const Footer: React.FC = () => {
             </div>
           </div>
           
-          {/* Links */}
-          <div>
+          {/* Quick Links */}
+          <div className="md:col-span-2">
             <h3 className="text-lg font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#home" className="text-text-muted hover:text-text-main transition-colors">Home</a>
-              </li>
-              <li>
-                <a href="#about" className="text-text-muted hover:text-text-main transition-colors">About</a>
-              </li>
-              <li>
-                <a href="#stack" className="text-text-muted hover:text-text-main transition-colors">Tech Stack</a>
-              </li>
-              <li>
-                <a href="#projects" className="text-text-muted hover:text-text-main transition-colors">Projects</a>
-              </li>
-              <li>
-                <a href="#blog" className="text-text-muted hover:text-text-main transition-colors">Blog</a>
-              </li>
-              <li>
-                <a href="#contact" className="text-text-muted hover:text-text-main transition-colors">Contact</a>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Legal */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Legal</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="/privacy" className="text-text-muted hover:text-text-main transition-colors">Privacy Policy</a>
-              </li>
-              <li>
-                <a href="/terms" className="text-text-muted hover:text-text-main transition-colors">Terms of Service</a>
-              </li>
-              <li>
-                <a href="/cookies" className="text-text-muted hover:text-text-main transition-colors">Cookie Policy</a>
-              </li>
-            </ul>
+            <div className="grid grid-cols-2 gap-4">
+              <ul className="space-y-2">
+                <li>
+                  <a href="#home" className="text-text-muted hover:text-text-main transition-colors">Home</a>
+                </li>
+                <li>
+                  <a href="#about" className="text-text-muted hover:text-text-main transition-colors">About</a>
+                </li>
+                <li>
+                  <a href="#stack" className="text-text-muted hover:text-text-main transition-colors">Tech Stack</a>
+                </li>
+              </ul>
+              <ul className="space-y-2">
+                <li>
+                  <a href="#projects" className="text-text-muted hover:text-text-main transition-colors">Projects</a>
+                </li>
+                <li>
+                  <a href="#blog" className="text-text-muted hover:text-text-main transition-colors">Blog</a>
+                </li>
+                <li>
+                  <a href="#contact" className="text-text-muted hover:text-text-main transition-colors">Contact</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         
@@ -108,7 +87,7 @@ const Footer: React.FC = () => {
         
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-text-muted text-sm mb-4 md:mb-0">
-            &copy; {currentYear} DevPort. All rights reserved.
+            &copy; {currentYear} Brandon Landaetta. All rights reserved.
           </p>
           
           <button

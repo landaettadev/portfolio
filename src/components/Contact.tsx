@@ -104,31 +104,31 @@
                 variants={itemVariants}
               >
                 <a 
-                  href="mailto:your.email@example.com"
+                  href="mailto:brandon@landaetta.dev"
                   className="flex items-center gap-3 text-text-muted hover:text-text-main transition-colors"
                 >
                   <Mail size={20} />
-                  <span className="text-sm sm:text-base">your.email@example.com</span>
+                  <span className="text-sm sm:text-base">brandon@landaetta.dev</span>
                 </a>
                 
                 <a 
-                  href="https://linkedin.com/in/your-profile"
+                  href="https://www.linkedin.com/in/brandon-landaetta-70340ba2/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-text-muted hover:text-text-main transition-colors"
                 >
                   <Linkedin size={20} />
-                  <span className="text-sm sm:text-base">linkedin.com/in/your-profile</span>
+                  <span className="text-sm sm:text-base">linkedin.com/in/brandon-landaetta-70340ba2</span>
                 </a>
                 
                 <a 
-                  href="https://github.com/your-username"
+                  href="https://github.com/landaettadev"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-text-muted hover:text-text-main transition-colors"
                 >
                   <Github size={20} />
-                  <span className="text-sm sm:text-base">github.com/your-username</span>
+                  <span className="text-sm sm:text-base">github.com/landaettadev</span>
                 </a>
               </motion.div>
             </motion.div>

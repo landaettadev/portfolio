@@ -28,7 +28,7 @@ const About: React.FC = () => {
     },
     {
       id: 2,
-      year: '2020 - 2024',
+      year: '2020 - 2023',
       title: 'Full Stack Developer',
       description: 'Participated in the development and implementation of internal modules for inventory management and lighting control systems, using ASP.NET Core, C#, and SQL Server. Built dynamic web interfaces with Angular and TypeScript, focused on optimizing user experience. Integrated REST services and JWT authentication to ensure security in platform access processes. Collaborated in migrating legacy systems to more scalable architectures, applying SOLID principles and Clean Architecture best practices.',
       icon: <Briefcase size={20} />,
