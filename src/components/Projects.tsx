@@ -48,10 +48,6 @@ const Projects: React.FC = () => {
       title: 'Digital Games Store - DigitalDeluxes',
       description: 'Sitio web para la venta de videojuegos digitales desarrollado en PHP puro y MySQL, con consumo de APIs de Kinguin e integración de múltiples pasarelas de pago.',
       image: 'https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    },
-    {
-      id: 5,
-      title: 'SMM Services Platform - 1popularity',
       description: 'Sitio web multipropósito desarrollado en CodeIgniter (PHP + MySQL) para la promoción y gestión de servicios SMM. Incluye consumo de APIs de proveedores e integración de múltiples pasarelas de pago.',
       image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       tech: ['CodeIgniter', 'PHP', 'MySQL', 'SMM APIs', 'Payment Gateways'],
