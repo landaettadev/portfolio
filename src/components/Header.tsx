@@ -43,7 +43,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-6 lg:px-12 flex justify-between items-center">
         <a href="#home" className="flex items-center gap-2">
           <img src="/logo.svg" alt="Logo" className="w-10 h-10" />
-          <span className="font-bold text-xl">Dev<span className="text-gradient">Port</span></span>
+          <span className="font-bold text-xl">Landaetta<span className="text-gradient">Dev</span></span>
         </a>
 
         {/* Desktop Navigation */}
