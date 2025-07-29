@@ -1,0 +1,138 @@
+{
+  "header": {
+    "home": "Home",
+    "about": "About",
+    "stack": "Stack",
+    "projects": "Projects",
+    "contact": "Contact",
+    "downloadCV": "Download CV"
+  },
+  "hero": {
+    "name": "Brandon",
+    "lastName": "Landaetta",
+    "title": "Software Engineer",
+    "description": "Building scalable, elegant solutions that empower users and transform businesses.",
+    "downloadCV": "Download CV",
+    "viewProjects": "View Projects",
+    "scrollDown": "Scroll down"
+  },
+  "about": {
+    "title": "About Me",
+    "description1": "I'm a passionate software engineer with over 5 years of experience building modern, user-focused web applications. I specialize in crafting elegant, performant interfaces that solve real problems.",
+    "description2": "My approach combines technical excellence with user empathy, ensuring that solutions are not only technically sound but also intuitive and accessible for all users.",
+    "description3": "I'm constantly learning and exploring new technologies, with a focus on performance optimization, component architecture, and design systems.",
+    "yearsExperience": "Years Experience",
+    "projects": "Projects",
+    "techStack": "Tech Stack",
+    "timeline": "Experience Timeline",
+    "positions": {
+      "intern": "Software Development Intern",
+      "fullstack": "Full Stack Developer",
+      "freelance": "Freelance",
+      "analyst": "Software Analyst",
+      "junior": "Junior Developer",
+      "trainee": "IT Technician Trainee"
+    },
+    "descriptions": {
+      "intern": "Designed and maintained web and desktop applications in C# and ASP .NET, improving functionality and support processes. Conducted database performance tuning and optimization for Microsoft SQL Server, reducing query times by up to 30%. Provided technical support and training to end users, ensuring smooth adoption of software solutions.",
+      "fullstack": "Participated in the development and implementation of internal modules for inventory management and lighting control systems, using ASP.NET Core, C#, and SQL Server. Built dynamic web interfaces with Angular and TypeScript, focused on optimizing user experience. Integrated REST services and JWT authentication to ensure security in platform access processes. Collaborated in migrating legacy systems to more scalable architectures, applying SOLID principles and Clean Architecture best practices.",
+      "freelance": "As a versatile freelance full-stack developer and digital entrepreneur, I have architected and delivered e-commerce platforms and web applications—selling digital products and consulting services—using PHP (Laravel, CodeIgniter) and Python (Flask), with responsive front-ends built in HTML5, Tailwind CSS, and Vue.js/React; I've deployed and managed these solutions on Google Cloud Platform and cPanel hosting, automated CI/CD with Azure Pipelines and GitHub Actions, and implemented Python-based ETL and analytics scripts to ensure sub-200 ms response times, 99.5 %+ uptime, and seamless, data-driven user experiences.",
+      "analyst": "Designed and maintained web and desktop applications in C# and ASP .NET, improving functionality and support processes. Conducted database performance tuning and optimization for Microsoft SQL Server, reducing query times by up to 30%. Provided technical support and training to end users, ensuring smooth adoption of software solutions.",
+      "junior": "Developed cryptocurrency point-of-sale applications in C# and ASP .NET, integrating hardware components and payment gateways. Collaborated on API design and implementation for secure transaction processing. Participated in code reviews and established unit testing practices to improve code quality.",
+      "trainee": "Supported AS/400 system maintenance and performance monitoring for pricing and after-sales campaigns. Assisted in data management and reporting, using DB2 queries to inform business decisions. Coordinated with cross-functional teams to troubleshoot technical issues and optimize operational workflows."
+    }
+  },
+  "stack": {
+    "title": "Tech Stack",
+    "categories": {
+      "all": "All",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "database": "Database",
+      "devops": "DevOps"
+    }
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "viewMore": "View More on GitHub",
+    "projects": {
+      "bitcoinATM": {
+        "title": "Bitcoin ATM Software",
+        "description": "ATM-type software developed in C# and SQL using web-forms, consuming CoinPayments API for cryptocurrency transactions."
+      },
+      "aiRetail": {
+        "title": "AI Retail Recommendation System - \"Just for You\" Module",
+        "description": "Custom AI-powered retail recommendation system using machine learning algorithms to enhance customer experience (Node.js + React + Python + Teradata)."
+      },
+      "enterpriseProjects": {
+        "title": "Various Enterprise Projects",
+        "description": "Support and development on projects based on Angular, C#, .NET, SQL, MVC, and PROXY technologies. Diverse projects completed across different companies using enterprise-level technologies."
+      },
+      "aiReports": {
+        "title": "AI-Powered Automated Reports System",
+        "description": "Custom system for automated report creation, integrated with generative AI using APIs and Google Cloud services in Python and SQL (Cloud Run, Gemini, Storage, BigQuery)."
+      },
+      "digitalGames": {
+        "title": "Digital Games Store - DigitalDeluxes",
+        "description": "Digital video game sales website developed in pure PHP and MySQL, with Kinguin API consumption and multiple payment gateway integration (Coinpal, Payeer, Wompi, MercadoPago)."
+      },
+      "smmPlatform": {
+        "title": "SMM Services Platform - 1popularity",
+        "description": "Multi-purpose website developed in CodeIgniter (PHP + MySQL) for SMM services promotion and management. Includes provider API consumption and integration of multiple payment gateways."
+      }
+    },
+    "liveDemo": "Live Demo"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Let's Connect",
+    "description": "I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision. Feel free to reach out using the form or connect with me on social media.",
+    "sendMessage": "Send a Message",
+    "form": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "subject": "Subject",
+      "message": "Message",
+      "namePlaceholder": "John Doe",
+      "emailPlaceholder": "john@example.com",
+      "subjectPlaceholder": "Project Inquiry",
+      "messagePlaceholder": "Tell me about your project...",
+      "sendButton": "Send Message",
+      "sending": "Sending...",
+      "success": "Your message has been sent successfully!",
+      "error": "Something went wrong. Please try again later."
+    }
+  },
+  "footer": {
+    "description": "Building elegant, scalable, and user-focused solutions with modern web technologies.",
+    "quickLinks": "Quick Links",
+    "backToTop": "Back to top",
+    "copyright": "All rights reserved."
+  },
+  "aiAssistant": {
+    "title": "AI Assistant",
+    "welcome": "Hello! I'm Brandon's assistant. How can I help you today?",
+    "welcomeMessage": "👋 Hi! I'm Brandon's AI assistant. Ask me anything about his experience, projects, or skills!",
+    "floatingMessage": "I'm Brandon's AI Assistant! Ask me anything! 🤖",
+    "placeholder": "Type your question...",
+    "you": "You",
+    "assistant": "Assistant",
+    "responses": {
+      "experience": "I have over 5 years of experience in software development, working with technologies like React, Angular, C#, Python, and PHP. I've developed web applications, enterprise systems, and AI solutions.",
+      "tech": "My tech stack includes React, Angular, TypeScript, C#, Python, PHP, Node.js, SQL Server, MySQL, and Google Cloud services. I also have experience with DevOps and CI/CD.",
+      "projects": "I've developed several notable projects: a Bitcoin ATM system, an AI-powered retail recommendation platform, automated reporting systems with AI, and e-commerce platforms.",
+      "education": "I'm a Software Engineer with training in web development, databases, and modern technologies. I stay updated by constantly learning new technologies.",
+      "location": "I currently work remotely and am available for projects worldwide. I have experience working with international teams.",
+      "availability": "Yes! I'm available for new projects and opportunities. You can contact me through the contact form or directly by email. I'd love to hear about your project.",
+      "freelance": "Yes, I work as a freelance developer and have delivered multiple successful projects. I have experience in e-commerce, web applications, and enterprise systems.",
+      "ai": "I have experience in AI projects, including recommendation systems, automated reporting with Gemini AI, and data analysis. I've worked with Google Cloud and AI APIs.",
+      "contact": "You can contact Brandon through:\n\n📧 Email: brandon@landaetta.dev\n📱 Phone: +57 300 636 1659\n\nHe's available for projects and collaborations. Feel free to reach out!",
+      "email": "📧 Brandon's email: brandon@landaetta.dev\n\nHe responds quickly to professional inquiries and project proposals.",
+      "phone": "📱 Brandon's phone: +57 300 636 1659\n\nYou can call or send a WhatsApp message. He's available during business hours.",
+      "whatsapp": "📱 Brandon's WhatsApp: +57 300 636 1659\n\nYou can send a direct WhatsApp message by clicking the button below:",
+      "cv": "📄 You can download Brandon's CV in two ways:\n\n1. Click the 'Download CV' button in the header\n2. Direct link: https://landaetta.dev/cv\n\nHis CV includes his full experience, projects, and skills.",
+      "download": "📥 To download Brandon's CV:\n\n• Click the 'Download CV' button in the navigation header\n• Or visit: https://landaetta.dev/cv\n\nHis CV is updated with his latest projects and skills.",
+      "default": "Hello! I'm Brandon's assistant. I can answer questions about his experience, projects, technologies, and availability. How can I help you?"
+    }
+  }
+}
