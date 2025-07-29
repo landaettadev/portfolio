@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import AnimatedScreens from './AnimatedScreens';
+<<<<<<< HEAD
 import ScrollEffect from './ScrollEffect';
+=======
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
@@ -11,7 +14,10 @@ const Hero: React.FC = () => {
   const pcLayerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+<<<<<<< HEAD
   const [isScrollEffectVisible, setIsScrollEffectVisible] = useState(false);
+=======
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < 640);
@@ -104,6 +110,7 @@ const Hero: React.FC = () => {
     };
   }, []);
 
+<<<<<<< HEAD
   // Activate scroll effect after a delay
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -113,6 +120,8 @@ const Hero: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+=======
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
   // Parallax effect
   useEffect(() => {
     const pcLayer = pcLayerRef.current;
@@ -224,11 +233,14 @@ const Hero: React.FC = () => {
               draggable="false"
             />
             <AnimatedScreens isMobile={isMobile} />
+<<<<<<< HEAD
             
             {/* Scroll Effect Overlay */}
             <div className="absolute inset-0 pointer-events-none">
               <ScrollEffect isVisible={isScrollEffectVisible} />
             </div>
+=======
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
           </div>
         </div>
       </div>

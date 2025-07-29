@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+<<<<<<< HEAD
 # Dependencies
 node_modules
 .pnp
@@ -78,6 +79,12 @@ jspm_packages/
 # Temporary folders
 tmp/
 temp/
+=======
+node_modules
+dist
+dist-ssr
+*.local
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
 
 # Editor directories and files
 .vscode/*
@@ -89,6 +96,7 @@ temp/
 *.njsproj
 *.sln
 *.sw?
+<<<<<<< HEAD
 
 # OS generated files
 Thumbs.db
@@ -97,3 +105,6 @@ Desktop.ini
 
 # Local files
 *.local
+=======
+.env
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8

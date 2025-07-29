@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Brandon Landaetta - Software Engineer Portfolio
 
 A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. Features an AI conversational assistant and smooth animations.
@@ -99,3 +100,6 @@ MIT License - see LICENSE file for details.
 - **Email**: brandon@landaetta.dev
 - **Phone**: +57 300 636 1659
 - **LinkedIn**: [Brandon Landaetta](https://www.linkedin.com/in/brandon-landaetta-70340ba2/)
+=======
+portfolio
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8

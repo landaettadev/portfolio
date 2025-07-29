@@ -108,6 +108,7 @@
     "quickLinks": "Enlaces Rápidos",
     "backToTop": "Volver arriba",
     "copyright": "Todos los derechos reservados."
+<<<<<<< HEAD
   },
   "aiAssistant": {
     "title": "Asistente IA",
@@ -134,5 +135,7 @@
       "download": "📥 Para descargar el CV de Brandon:\n\n• Haz clic en el botón 'Descargar CV' en la navegación\n• O visita: https://landaetta.dev/cv\n\nSu CV está actualizado con sus últimos proyectos y habilidades.",
       "default": "¡Hola! Soy el asistente de Brandon. Puedo responder preguntas sobre su experiencia, proyectos, tecnologías y disponibilidad. ¿En qué puedo ayudarte?"
     }
+=======
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
   }
 }

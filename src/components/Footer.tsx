@@ -1,10 +1,18 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+<<<<<<< HEAD
 import { ArrowUp, Github, Linkedin, Mail, Phone } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
   const currentYear = 2025;
+=======
+import { ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
+
+const Footer: React.FC = () => {
+  const { t } = useTranslation();
+  const currentYear = new Date().getFullYear();
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
   
   const scrollToTop = () => {
     window.scrollTo({
@@ -21,7 +29,11 @@ const Footer: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <img src="/logo.svg" alt="Logo" className="w-8 h-8" />
+<<<<<<< HEAD
               <span className="font-bold text-xl">Landaetta<span className="text-gradient">Dev</span></span>
+=======
+              <span className="font-bold text-xl">Dev<span className="text-gradient">Port</span></span>
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
             </div>
             <p className="text-text-muted mb-6">
               {t('footer.description')}
@@ -52,6 +64,7 @@ const Footer: React.FC = () => {
               >
                 <Mail size={20} />
               </a>
+<<<<<<< HEAD
               <a
                 href="https://wa.me/573006361659"
                 target="_blank"
@@ -61,6 +74,8 @@ const Footer: React.FC = () => {
               >
                 <Phone size={20} />
               </a>
+=======
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
             </div>
           </div>
           

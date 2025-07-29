@@ -108,6 +108,7 @@
     "quickLinks": "Quick Links",
     "backToTop": "Back to top",
     "copyright": "All rights reserved."
+<<<<<<< HEAD
   },
   "aiAssistant": {
     "title": "AI Assistant",
@@ -134,5 +135,7 @@
       "download": "📥 To download Brandon's CV:\n\n• Click the 'Download CV' button in the navigation header\n• Or visit: https://landaetta.dev/cv\n\nHis CV is updated with his latest projects and skills.",
       "default": "Hello! I'm Brandon's assistant. I can answer questions about his experience, projects, technologies, and availability. How can I help you?"
     }
+=======
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
   }
 }

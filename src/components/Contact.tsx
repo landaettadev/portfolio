@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useTranslation } from 'react-i18next';
+<<<<<<< HEAD
 import { Send, Github, Linkedin, Mail, Phone } from 'lucide-react';
+=======
+import { Send, Github, Linkedin, Instagram, Mail } from 'lucide-react';
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
 
 const Contact: React.FC = () => {
   const { t } = useTranslation();
@@ -51,7 +55,11 @@ const Contact: React.FC = () => {
       } else {
         throw new Error('Failed to send message');
       }
+<<<<<<< HEAD
     } catch {
+=======
+    } catch (error) {
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
       setFormStatus('error');
       
       // Reset form status after 5 seconds
@@ -120,6 +128,7 @@ const Contact: React.FC = () => {
               </a>
               
               <a 
+<<<<<<< HEAD
                 href="https://wa.me/573006361659"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -130,6 +139,8 @@ const Contact: React.FC = () => {
               </a>
               
               <a 
+=======
+>>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
                 href="https://www.linkedin.com/in/brandon-landaetta-70340ba2/"
                 target="_blank"
                 rel="noopener noreferrer"
