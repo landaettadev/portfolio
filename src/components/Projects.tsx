@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useTranslation } from 'react-i18next';
-<<<<<<< HEAD
 import { Github, X } from 'lucide-react';
-=======
-import { ExternalLink, Github, X } from 'lucide-react';
->>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
 
 interface Project {
   id: number;
@@ -50,21 +46,14 @@ const Projects: React.FC = () => {
       featured: true,
     },
     {
-<<<<<<< HEAD
       id: 3,
-=======
-      title: 'SMM Services Platform - 1popularity',
->>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
       title: t('projects.projects.enterpriseProjects.title'),
       description: t('projects.projects.enterpriseProjects.description'),
       image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       tech: ['Angular', 'C#', '.NET', 'SQL', 'MVC', 'PROXY'],
       demoUrl: '',
       githubUrl: '',
-<<<<<<< HEAD
       featured: false,
-=======
->>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
     },
     {
       id: 6,
@@ -118,15 +107,6 @@ const Projects: React.FC = () => {
       },
     },
   };
-
-<<<<<<< HEAD
-
-=======
-  const openProjectModal = (project: Project) => {
-    setSelectedProject(project);
-    document.body.style.overflow = 'hidden';
-  };
->>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
 
   const closeProjectModal = () => {
     setSelectedProject(null);

@@ -130,16 +130,10 @@ const Header: React.FC = () => {
 
       {/* Mobile Navigation */}
       <div
-<<<<<<< HEAD
         className={`md:hidden fixed top-0 left-0 right-0 w-full z-40 bg-bg-primary/95 backdrop-blur-sm shadow-md transition-all duration-300 ${
           isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'
         }`}
         style={{ top: isScrolled ? '80px' : '100px' }}
-=======
-        className={`md:hidden fixed top-[100%] left-0 right-0 w-full z-50 bg-bg-primary/95 backdrop-blur-sm shadow-md transition-all duration-300 ${
-          isMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
-        } overflow-hidden`}
->>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
       >
         <div className="container mx-auto px-6 py-5 flex flex-col gap-4">
           {navLinks.map((link) => (
