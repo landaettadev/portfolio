@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useTranslation } from 'react-i18next';
 import { ExternalLink, Github, X } from 'lucide-react';
 
 interface Project {
@@ -15,6 +16,7 @@ interface Project {
 }
 
 const Projects: React.FC = () => {
+  const { t } = useTranslation();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [sectionRef, inView] = useInView({
     triggerOnce: true,
@@ -25,8 +27,8 @@ const Projects: React.FC = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: 'Bitcoin ATM Software',
-      description: 'ATM-type software developed in C# and SQL using web-forms, consuming CoinPayments API for cryptocurrency transactions.',
+      title: t('projects.projects.bitcoinATM.title'),
+      description: t('projects.projects.bitcoinATM.description'),
       image: 'https://images.pexels.com/photos/730547/pexels-photo-730547.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       tech: ['C#', 'SQL Server', 'Web Forms', 'CoinPayments API', 'ASP.NET'],
       demoUrl: '',
@@ -35,8 +37,8 @@ const Projects: React.FC = () => {
     },
     {
       id: 2,
-      title: 'AI Retail Recommendation System - "Just for You" Module',
-      description: 'Custom AI-powered retail recommendation system using machine learning algorithms to enhance customer experience (Node.js + React + Python + Teradata).',
+      title: t('projects.projects.aiRetail.title'),
+      description: t('projects.projects.aiRetail.description'),
       image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       tech: ['Node.js', 'React', 'Python', 'Teradata', 'Machine Learning'],
       demoUrl: '',
@@ -45,8 +47,8 @@ const Projects: React.FC = () => {
     },
     {
       title: 'SMM Services Platform - 1popularity',
-      title: 'Various Enterprise Projects',
-      description: 'Support and development on projects based on Angular, C#, .NET, SQL, MVC, and PROXY technologies. Diverse projects completed across different companies using enterprise-level technologies.',
+      title: t('projects.projects.enterpriseProjects.title'),
+      description: t('projects.projects.enterpriseProjects.description'),
       image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       tech: ['Angular', 'C#', '.NET', 'SQL', 'MVC', 'PROXY'],
       demoUrl: '',
@@ -54,8 +56,8 @@ const Projects: React.FC = () => {
     },
     {
       id: 6,
-      title: 'AI-Powered Automated Reports System',
-      description: 'Custom system for automated report creation, integrated with generative AI using APIs and Google Cloud services in Python and SQL (Cloud Run, Gemini, Storage, BigQuery).',
+      title: t('projects.projects.aiReports.title'),
+      description: t('projects.projects.aiReports.description'),
       image: 'https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       tech: ['Python', 'Google Cloud', 'Cloud Run', 'Gemini AI', 'BigQuery', 'SQL'],
       demoUrl: '',
@@ -64,8 +66,8 @@ const Projects: React.FC = () => {
     },
     {
       id: 7,
-      title: 'Digital Games Store - DigitalDeluxes',
-      description: 'Digital video game sales website developed in pure PHP and MySQL, with Kinguin API consumption and multiple payment gateway integration (Coinpal, Payeer, Wompi, MercadoPago).',
+      title: t('projects.projects.digitalGames.title'),
+      description: t('projects.projects.digitalGames.description'),
       image: 'https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       tech: ['PHP', 'MySQL', 'Kinguin API', 'Payment Gateways'],
       demoUrl: 'https://digitaldeluxes.com',
@@ -74,8 +76,8 @@ const Projects: React.FC = () => {
     },
     {
       id: 8,
-      title: 'SMM Services Platform - 1popularity',
-      description: 'Multi-purpose website developed in CodeIgniter (PHP + MySQL) for SMM services promotion and management. Includes provider API consumption and integration of multiple payment gateways.',
+      title: t('projects.projects.smmPlatform.title'),
+      description: t('projects.projects.smmPlatform.description'),
       image: 'https://images.pexels.com/photos/267389/pexels-photo-267389.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       tech: ['CodeIgniter', 'PHP', 'MySQL', 'SMM APIs', 'Payment Gateways'],
       demoUrl: 'https://1popularity.com',
@@ -118,7 +120,7 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="section bg-bg-primary" ref={sectionRef}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-        <h2 className="section-title text-center sm:text-left">Featured Projects</h2>
+        <h2 className="section-title text-center sm:text-left">{t('projects.title')}</h2>
         
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12"
@@ -172,7 +174,7 @@ const Projects: React.FC = () => {
                         rel="noopener noreferrer"
                         className="text-sm px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors text-white"
                       >
-                        Live Demo
+                        {t('projects.liveDemo')}
                       </a>
                     )}
                   </div>
@@ -189,7 +191,7 @@ const Projects: React.FC = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 btn-secondary"
           >
-            View More on GitHub
+            {t('projects.viewMore')}
             <Github size={18} />
           </a>
         </div>
@@ -252,7 +254,7 @@ const Projects: React.FC = () => {
                     rel="noopener noreferrer"
                     className="btn-primary"
                   >
-                    Live Demo
+                    {t('projects.liveDemo')}
                   </a>
                 )}
               </div>

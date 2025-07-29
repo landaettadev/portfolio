@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowDown } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import AnimatedScreens from './AnimatedScreens';
 
 const Hero: React.FC = () => {
+  const { t } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const pcLayerRef = useRef<HTMLDivElement>(null);
@@ -171,15 +173,14 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 flex flex-col lg:flex-row items-center justify-between py-8 sm:py-16">
         <div className="max-w-xl content z-10 text-center lg:text-left">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white">
-            Brandon&nbsp;
+            {t('hero.name')}&nbsp;
             <span className="text-gradient">
-              Landaetta
+              {t('hero.lastName')}
             </span>
-            <br /> Software&nbsp;Engineer
+            <br /> {t('hero.title')}
           </h1>
           <p className="mt-4 sm:mt-6 text-base sm:text-lg text-slate-300">
-            Building scalable, elegant solutions that empower users and
-            transform businesses.
+            {t('hero.description')}
           </p>
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <a 
@@ -188,13 +189,13 @@ const Hero: React.FC = () => {
               rel="noopener noreferrer"
               className="btn-primary group w-full sm:w-auto"
             >
-              Download CV
+              {t('hero.downloadCV')}
             </a>
             <a 
               href="#projects"
               className="btn-secondary w-full sm:w-auto"
             >
-              View Projects
+              {t('hero.viewProjects')}
             </a>
           </div>
         </div>
@@ -222,7 +223,7 @@ const Hero: React.FC = () => {
           href="#about" 
           className="flex flex-col items-center text-text-muted hover:text-text-main transition-colors duration-300"
         >
-          <span className="mb-2 text-sm">Scroll down</span>
+          <span className="mb-2 text-sm">{t('hero.scrollDown')}</span>
           <ArrowDown className="animate-bounce" size={20} />
         </a>
       </div>

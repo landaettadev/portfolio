@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useTranslation } from 'react-i18next';
 
 interface TechStack {
   id: number;
@@ -10,6 +11,7 @@ interface TechStack {
 }
 
 const Stack: React.FC = () => {
+  const { t } = useTranslation();
   const [filter, setFilter] = useState<string>('all');
   const [sectionRef, inView] = useInView({
     triggerOnce: true,
@@ -72,11 +74,11 @@ const Stack: React.FC = () => {
   ];
 
   const categories = [
-    { id: 'all', label: 'All' },
-    { id: 'frontend', label: 'Frontend' },
-    { id: 'backend', label: 'Backend' },
-    { id: 'database', label: 'Database' },
-    { id: 'devops', label: 'DevOps' },
+    { id: 'all', label: t('stack.categories.all') },
+    { id: 'frontend', label: t('stack.categories.frontend') },
+    { id: 'backend', label: t('stack.categories.backend') },
+    { id: 'database', label: t('stack.categories.database') },
+    { id: 'devops', label: t('stack.categories.devops') },
   ];
 
   const filteredTech = filter === 'all' 
@@ -118,7 +120,7 @@ const Stack: React.FC = () => {
   return (
     <section id="stack" className="section bg-bg-primary/50" ref={sectionRef}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-        <h2 className="section-title text-center sm:text-left">Tech Stack</h2>
+        <h2 className="section-title text-center sm:text-left">{t('stack.title')}</h2>
         
         <div className="flex flex-wrap gap-2 mt-6 sm:mt-8 justify-center sm:justify-start">
           {categories.map(category => (

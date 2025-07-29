@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useTranslation } from 'react-i18next';
 import { Briefcase, GraduationCap, Award, ExternalLink } from 'lucide-react';
 
 interface TimelineItem {
@@ -13,6 +14,7 @@ interface TimelineItem {
 }
 
 const About: React.FC = () => {
+  const { t } = useTranslation();
   const [sectionRef, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -22,44 +24,44 @@ const About: React.FC = () => {
     {
       id: 1,
       year: 'Jul 2024 – Jan 2025',
-      title: 'Software Development Intern',
-      description: 'Designed and maintained web and desktop applications in C# and ASP .NET, improving functionality and support processes. Conducted database performance tuning and optimization for Microsoft SQL Server, reducing query times by up to 30%. Provided technical support and training to end users, ensuring smooth adoption of software solutions.',
+      title: t('about.positions.intern'),
+      description: t('about.descriptions.intern'),
       icon: <Briefcase size={20} />,
     },
     {
       id: 2,
       year: '2020 - 2023',
-      title: 'Full Stack Developer',
-      description: 'Participated in the development and implementation of internal modules for inventory management and lighting control systems, using ASP.NET Core, C#, and SQL Server. Built dynamic web interfaces with Angular and TypeScript, focused on optimizing user experience. Integrated REST services and JWT authentication to ensure security in platform access processes. Collaborated in migrating legacy systems to more scalable architectures, applying SOLID principles and Clean Architecture best practices.',
+      title: t('about.positions.fullstack'),
+      description: t('about.descriptions.fullstack'),
       icon: <Briefcase size={20} />,
     },
     {
       id: 3,
       year: '2019 - Present',
-      title: 'Freelance',
-      description: 'As a versatile freelance full-stack developer and digital entrepreneur, I have architected and delivered e-commerce platforms and web applications—selling digital products and consulting services—using PHP (Laravel, CodeIgniter) and Python (Flask), with responsive front-ends built in HTML5, Tailwind CSS, and Vue.js/React; I\'ve deployed and managed these solutions on Google Cloud Platform and cPanel hosting, automated CI/CD with Azure Pipelines and GitHub Actions, and implemented Python-based ETL and analytics scripts to ensure sub-200 ms response times, 99.5 %+ uptime, and seamless, data-driven user experiences.',
+      title: t('about.positions.freelance'),
+      description: t('about.descriptions.freelance'),
       icon: <Briefcase size={20} />,
       link: 'landaettadev.com',
     },
     {
       id: 4,
       year: '2018 - 2020',
-      title: 'Software Analyst ',
-      description: 'Designed and maintained web and desktop applications in C# and ASP .NET, improving functionality and support processes. Conducted database performance tuning and optimization for Microsoft SQL Server, reducing query times by up to 30%. Provided technical support and training to end users, ensuring smooth adoption of software solutions.',
+      title: t('about.positions.analyst'),
+      description: t('about.descriptions.analyst'),
       icon: <Briefcase size={20} />,
     },
     {
       id: 5,
       year: '2017-2018',
-      title: 'Junior Developer',
-      description: 'Developed cryptocurrency point-of-sale applications in C# and ASP .NET, integrating hardware components and payment gateways.Collaborated on API design and implementation for secure transaction processing.Participated in code reviews and established unit testing practices to improve code quality.',
+      title: t('about.positions.junior'),
+      description: t('about.descriptions.junior'),
       icon: <GraduationCap size={20} />,
     },
     {
       id: 6,
       year: '2015',
-      title: 'IT Technician Trainee ',
-      description: 'Supported AS/400 system maintenance and performance monitoring for pricing and after-sales campaigns.Assisted in data management and reporting, using DB2 queries to inform business decisions.Coordinated with cross-functional teams to troubleshoot technical issues and optimize operational workflows.',
+      title: t('about.positions.trainee'),
+      description: t('about.descriptions.trainee'),
       icon: <Award size={20} />,
     },
   ];
@@ -88,43 +90,38 @@ const About: React.FC = () => {
   return (
     <section id="about" className="section bg-bg-primary" ref={sectionRef}>
       <div className="container mx-auto px-6 lg:px-12">
-        <h2 className="section-title">About Me</h2>
+        <h2 className="section-title">{t('about.title')}</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
           <div>
             <p className="text-lg text-text-muted mb-6">
-              I'm a passionate software engineer with over 5 years of experience building modern, 
-              user-focused web applications. I specialize in crafting elegant, 
-              performant interfaces that solve real problems.
+              {t('about.description1')}
             </p>
             <p className="text-lg text-text-muted mb-6">
-              My approach combines technical excellence with user empathy, 
-              ensuring that solutions are not only technically sound but 
-              also intuitive and accessible for all users.
+              {t('about.description2')}
             </p>
             <p className="text-lg text-text-muted">
-              I'm constantly learning and exploring new technologies, with a focus on 
-              performance optimization, component architecture, and design systems.
+              {t('about.description3')}
             </p>
             
             <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
               <div className="card flex flex-col items-center p-4">
                 <span className="text-2xl font-bold text-gradient">5+</span>
-                <span className="text-sm text-text-muted mt-2">Years Experience</span>
+                <span className="text-sm text-text-muted mt-2">{t('about.yearsExperience')}</span>
               </div>
               <div className="card flex flex-col items-center p-4">
                 <span className="text-2xl font-bold text-gradient">15+</span>
-                <span className="text-sm text-text-muted mt-2">Projects</span>
+                <span className="text-sm text-text-muted mt-2">{t('about.projects')}</span>
               </div>
               <div className="card flex flex-col items-center p-4">
                 <span className="text-2xl font-bold text-gradient">20+</span>
-                <span className="text-sm text-text-muted mt-2">Tech Stack</span>
+                <span className="text-sm text-text-muted mt-2">{t('about.techStack')}</span>
               </div>
             </div>
           </div>
           
           <div>
-            <h3 className="text-xl font-bold mb-6">Experience Timeline</h3>
+            <h3 className="text-xl font-bold mb-6">{t('about.timeline')}</h3>
             
             <motion.div 
               className="relative pl-8 border-l border-slate-700 ml-2"
