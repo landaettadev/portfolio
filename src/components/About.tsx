@@ -37,7 +37,7 @@ const About: React.FC = () => {
       id: 3,
       year: '2019 - Present',
       title: 'Freelance',
-      description: 'As a versatile freelance full-stack developer and digital entrepreneur, I have architected and delivered e-commerce platforms and web applications—selling digital products and consulting services—using PHP (Laravel, CodeIgniter) and Python (Flask), with responsive front-ends built in HTML5, Tailwind CSS, and Vue.js/React; I've deployed and managed these solutions on Google Cloud Platform and cPanel hosting, automated CI/CD with Azure Pipelines and GitHub Actions, and implemented Python-based ETL and analytics scripts to ensure sub-200 ms response times, 99.5 %+ uptime, and seamless, data-driven user experiences.',
+      description: 'As a versatile freelance full-stack developer and digital entrepreneur, I have architected and delivered e-commerce platforms and web applications—selling digital products and consulting services—using PHP (Laravel, CodeIgniter) and Python (Flask), with responsive front-ends built in HTML5, Tailwind CSS, and Vue.js/React; I\'ve deployed and managed these solutions on Google Cloud Platform and cPanel hosting, automated CI/CD with Azure Pipelines and GitHub Actions, and implemented Python-based ETL and analytics scripts to ensure sub-200 ms response times, 99.5 %+ uptime, and seamless, data-driven user experiences.',
       icon: <Briefcase size={20} />,
       link: 'landaettadev.com',
     },
