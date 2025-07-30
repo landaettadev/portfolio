@@ -28,16 +28,13 @@ const Contact: React.FC = () => {
     setFormStatus('submitting');
     
     try {
-      // Send email using a service like EmailJS or your backend API
+      // Send email using our API (no third party needed)
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          to: 'brandon@landaetta.dev'
-        }),
+        body: JSON.stringify(formData),
       });
       
       if (response.ok) {

@@ -1,4 +1,4 @@
-import sgMail from '@sendgrid/mail';
+import nodemailer from 'nodemailer';
 
 export default async function handler(req, res) {
   // Only allow POST requests
@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, subject, message, to } = req.body;
+    const { name, email, subject, message } = req.body;
 
     // Validate required fields
     if (!name || !email || !subject || !message) {
@@ -26,17 +26,26 @@ export default async function handler(req, res) {
       email,
       subject,
       message,
-      to: to || 'brandon@landaetta.dev',
       timestamp: new Date().toISOString()
     });
 
-    // Send email using SendGrid
-    if (process.env.SENDGRID_API_KEY) {
-      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-      
-      const msg = {
-        to: to || 'brandon@landaetta.dev',
-        from: process.env.FROM_EMAIL || 'noreply@landaetta.dev',
+    // Option 1: Use Cloudflare Email Routing (No third party needed)
+    // Since you have Cloudflare Email Routing configured,
+    // we can send to brandon@landeatta.dev and it will be routed to landaetta@live.com
+    
+    // Option 2: Use Gmail SMTP (Free, no third party)
+    if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
+      const transporter = nodemailer.createTransporter({
+        service: 'gmail',
+        auth: {
+          user: process.env.GMAIL_USER,
+          pass: process.env.GMAIL_APP_PASSWORD
+        }
+      });
+
+      const mailOptions = {
+        from: `"${name}" <${email}>`,
+        to: 'brandon@landeatta.dev', // Will be routed to landaetta@live.com
         subject: `Contact Form: ${subject}`,
         text: `
           Name: ${name}
@@ -59,17 +68,17 @@ export default async function handler(req, res) {
               <p style="color: #374151; line-height: 1.6; white-space: pre-wrap;">${message}</p>
             </div>
             <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 14px;">
-              <p>This message was sent from the contact form on <a href="https://landaetta.dev" style="color: #2563eb;">landaetta.dev</a></p>
+              <p>This message was sent from the contact form on <a href="https://landeatta.dev" style="color: #2563eb;">landeatta.dev</a></p>
               <p>Timestamp: ${new Date().toLocaleString()}</p>
             </div>
           </div>
         `
       };
-      
-      await sgMail.send(msg);
-      console.log('Email sent successfully via SendGrid');
+
+      await transporter.sendMail(mailOptions);
+      console.log('Email sent successfully via Gmail SMTP');
     } else {
-      console.log('SendGrid API key not configured, skipping email send');
+      console.log('Gmail credentials not configured, logging data only');
     }
 
     // Return success response
