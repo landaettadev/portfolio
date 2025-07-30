@@ -1,3 +1,5 @@
+import sgMail from '@sendgrid/mail';
+
 export default async function handler(req, res) {
   // Only allow POST requests
   if (req.method !== 'POST') {
@@ -18,8 +20,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid email format' });
     }
 
-    // For now, we'll just log the contact form data
-    // In a real implementation, you would send an email here
+    // Log the contact form data for debugging
     console.log('Contact form submission:', {
       name,
       email,
@@ -28,6 +29,48 @@ export default async function handler(req, res) {
       to: to || 'brandon@landaetta.dev',
       timestamp: new Date().toISOString()
     });
+
+    // Send email using SendGrid
+    if (process.env.SENDGRID_API_KEY) {
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      
+      const msg = {
+        to: to || 'brandon@landaetta.dev',
+        from: process.env.FROM_EMAIL || 'noreply@landaetta.dev',
+        subject: `Contact Form: ${subject}`,
+        text: `
+          Name: ${name}
+          Email: ${email}
+          Subject: ${subject}
+          Message: ${message}
+        `,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h2 style="color: #2563eb; border-bottom: 2px solid #2563eb; padding-bottom: 10px;">
+              New Contact Form Submission
+            </h2>
+            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <p><strong style="color: #374151;">Name:</strong> ${name}</p>
+              <p><strong style="color: #374151;">Email:</strong> <a href="mailto:${email}" style="color: #2563eb;">${email}</a></p>
+              <p><strong style="color: #374151;">Subject:</strong> ${subject}</p>
+            </div>
+            <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; border-left: 4px solid #2563eb;">
+              <h3 style="color: #374151; margin-top: 0;">Message:</h3>
+              <p style="color: #374151; line-height: 1.6; white-space: pre-wrap;">${message}</p>
+            </div>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 14px;">
+              <p>This message was sent from the contact form on <a href="https://landaetta.dev" style="color: #2563eb;">landaetta.dev</a></p>
+              <p>Timestamp: ${new Date().toLocaleString()}</p>
+            </div>
+          </div>
+        `
+      };
+      
+      await sgMail.send(msg);
+      console.log('Email sent successfully via SendGrid');
+    } else {
+      console.log('SendGrid API key not configured, skipping email send');
+    }
 
     // Return success response
     res.status(200).json({ 
