@@ -83,7 +83,7 @@ const Header: React.FC = () => {
           </div>
 
           <a
-            href="/cv.pdf"
+            href={i18n.language === 'es' ? '/cv-es.pdf' : '/cv-en.pdf'}
             target="_blank"
             rel="noopener noreferrer"
             className="px-4 py-2 rounded-lg font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 transition-all duration-300 text-sm"
@@ -147,7 +147,7 @@ const Header: React.FC = () => {
             </a>
           ))}
           <a
-            href="/cv.pdf"
+            href={i18n.language === 'es' ? '/cv-es.pdf' : '/cv-en.pdf'}
             target="_blank"
             rel="noopener noreferrer"
             className="px-4 py-2 rounded-lg font-medium bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 transition-all duration-300 text-center mt-2"

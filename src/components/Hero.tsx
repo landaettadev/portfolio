@@ -3,6 +3,7 @@ import { ArrowDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import AnimatedScreens from './AnimatedScreens';
 import ScrollEffect from './ScrollEffect';
+import i18n from '../i18n';
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
@@ -194,7 +195,7 @@ const Hero: React.FC = () => {
           </p>
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <a 
-              href="/cv.pdf" 
+              href={i18n.language === 'es' ? '/cv-es.pdf' : '/cv-en.pdf'} 
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary group w-full sm:w-auto"
