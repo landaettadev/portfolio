@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useTranslation } from 'react-i18next';
 import { Send, Github, Linkedin, Mail, Phone } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const { t } = useTranslation();
@@ -28,27 +29,36 @@ const Contact: React.FC = () => {
     setFormStatus('submitting');
     
     try {
-      // Send email using our API (no third party needed)
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      // Send email using EmailJS
+             const templateParams = {
+         name: formData.name,
+         email: formData.email,
+         title: formData.subject,
+         message: formData.message,
+         to_email: 'brandon@landaetta.dev'
+       };
+
+             await emailjs.send(
+         'service_s7h9p86',
+         'template_8bweweu', 
+         templateParams,
+         'vq0ytfCOtRLG1-Ec7'
+       );
       
-      if (response.ok) {
-        setFormStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        
-        // Reset form status after 5 seconds
-        setTimeout(() => {
-          setFormStatus('idle');
-        }, 5000);
-      } else {
-        throw new Error('Failed to send message');
-      }
-    } catch {
+      setFormStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      
+      // Reset form status after 5 seconds
+      setTimeout(() => {
+        setFormStatus('idle');
+      }, 5000);
+    } catch (error: any) {
+      console.error('EmailJS Error:', error);
+      console.error('Error details:', {
+        status: error?.status,
+        text: error?.text,
+        response: error?.response
+      });
       setFormStatus('error');
       
       // Reset form status after 5 seconds
