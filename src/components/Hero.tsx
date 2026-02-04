@@ -10,7 +10,6 @@ const Hero: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const pcLayerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isScrollEffectVisible, setIsScrollEffectVisible] = useState(false);
 
@@ -158,7 +157,7 @@ const Hero: React.FC = () => {
       {/* Stars canvas */}
       <canvas ref={canvasRef} className="absolute inset-0 -z-10"></canvas>
       
-      {/* Video Background */}
+      {/* Video Background - Commented out: video file not present
       <video
         ref={videoRef}
         autoPlay
@@ -179,6 +178,7 @@ const Hero: React.FC = () => {
       >
         <source src="/assets/code-loop.mp4" type="video/mp4" />
       </video>
+      */}
       
       {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 flex flex-col lg:flex-row items-center justify-between py-8 sm:py-16">

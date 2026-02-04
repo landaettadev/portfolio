@@ -1,10 +1,18 @@
 /// <reference types="vite/client" />
 
+interface ImportMetaEnv {
+  readonly VITE_API_URL: string;
+  readonly VITE_GA_ID: string;
+  readonly VITE_EMAILJS_SERVICE_ID: string;
+  readonly VITE_EMAILJS_TEMPLATE_ID: string;
+  readonly VITE_EMAILJS_PUBLIC_KEY: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
 interface Window {
-<<<<<<< HEAD
   google: unknown;
-=======
-  google: any;
->>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8
   googleTranslateElementInit: () => void;
 }

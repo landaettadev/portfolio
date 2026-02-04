@@ -117,6 +117,28 @@
     "placeholder": "Escribe tu pregunta...",
     "you": "Tú",
     "assistant": "Asistente",
+    "open": "Abrir Asistente IA",
+    "close": "Cerrar chat",
+    "send": "Enviar mensaje",
+    "clearChat": "Limpiar chat",
+    "openWhatsApp": "Abrir chat de WhatsApp",
+    "quickSuggestions": "Preguntas rápidas:",
+    "suggestions": {
+      "experience": "¿Cuál es tu experiencia?",
+      "tech": "¿Qué tecnologías usas?",
+      "projects": "Cuéntame sobre tus proyectos",
+      "contact": "¿Cómo puedo contactarte?",
+      "cv": "¿Dónde puedo descargar tu CV?",
+      "availability": "¿Estás disponible para contratar?"
+    },
+    "suggestionLabels": {
+      "experience": "Experiencia",
+      "tech": "Tecnologías",
+      "projects": "Proyectos",
+      "contact": "Contacto",
+      "cv": "CV",
+      "availability": "Disponibilidad"
+    },
     "responses": {
       "experience": "Tengo más de 5 años de experiencia en desarrollo de software, trabajando con tecnologías como React, Angular, C#, Python y PHP. He desarrollado aplicaciones web, sistemas empresariales y soluciones de IA.",
       "tech": "Mi stack tecnológico incluye React, Angular, TypeScript, C#, Python, PHP, Node.js, SQL Server, MySQL, y servicios de Google Cloud. También tengo experiencia con DevOps y CI/CD.",

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Brandon Landaetta - Software Engineer Portfolio
 
 A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. Features an AI conversational assistant and smooth animations.
@@ -28,7 +27,7 @@ A modern, responsive portfolio website built with React, TypeScript, and Tailwin
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd project
+cd portfolio
 
 # Install dependencies
 npm install
@@ -45,7 +44,7 @@ npm run lint
 
 ## 🌐 Live Demo
 
-[Your Portfolio URL]
+[https://brandonlandaetta.dev](https://brandonlandaetta.dev)
 
 ## 📱 Features Overview
 
@@ -100,6 +99,3 @@ MIT License - see LICENSE file for details.
 - **Email**: brandon@landaetta.dev
 - **Phone**: +57 300 636 1659
 - **LinkedIn**: [Brandon Landaetta](https://www.linkedin.com/in/brandon-landaetta-70340ba2/)
-=======
-portfolio
->>>>>>> 686329b362f44869f2c5a05335d8757d93613fa8

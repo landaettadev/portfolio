@@ -117,6 +117,28 @@
     "placeholder": "Type your question...",
     "you": "You",
     "assistant": "Assistant",
+    "open": "Open AI Assistant",
+    "close": "Close chat",
+    "send": "Send message",
+    "clearChat": "Clear chat",
+    "openWhatsApp": "Open WhatsApp chat",
+    "quickSuggestions": "Quick questions:",
+    "suggestions": {
+      "experience": "What's your experience?",
+      "tech": "What technologies do you use?",
+      "projects": "Tell me about your projects",
+      "contact": "How can I contact you?",
+      "cv": "Where can I download your CV?",
+      "availability": "Are you available for hire?"
+    },
+    "suggestionLabels": {
+      "experience": "Experience",
+      "tech": "Tech Stack",
+      "projects": "Projects",
+      "contact": "Contact",
+      "cv": "CV",
+      "availability": "Availability"
+    },
     "responses": {
       "experience": "I have over 5 years of experience in software development, working with technologies like React, Angular, C#, Python, and PHP. I've developed web applications, enterprise systems, and AI solutions.",
       "tech": "My tech stack includes React, Angular, TypeScript, C#, Python, PHP, Node.js, SQL Server, MySQL, and Google Cloud services. I also have experience with DevOps and CI/CD.",
