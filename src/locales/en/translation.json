@@ -26,6 +26,7 @@
     "techStack": "Tech Stack",
     "timeline": "Experience Timeline",
     "positions": {
+      "eafit": "Software Developer",
       "intern": "Software Development Intern",
       "fullstack": "Full Stack Developer",
       "freelance": "Freelance",
@@ -34,6 +35,7 @@
       "trainee": "IT Technician Trainee"
     },
     "descriptions": {
+      "eafit": "Developed conversational AI agents using Microsoft Copilot Studio for automated student support, designing 4 conversation flows with optimized business logic and prompts. Built a full-stack web portal with Angular 20 (zoneless, Signals), TypeScript, RxJS, and .NET Core. Integrated multiple AI services: Azure AI Foundry, OpenAI, and Copilot Studio with BotFramework-WebChat. Implemented enterprise telemetry with Azure Application Insights, ensuring GDPR compliance, chat state persistence system with localStorage, and corporate authentication with MSAL. Configured Azure infrastructure (App Services, Application Insights, Bot Services).",
       "intern": "Designed and maintained web and desktop applications in C# and ASP .NET, improving functionality and support processes. Conducted database performance tuning and optimization for Microsoft SQL Server, reducing query times by up to 30%. Provided technical support and training to end users, ensuring smooth adoption of software solutions.",
       "fullstack": "Participated in the development and implementation of internal modules for inventory management and lighting control systems, using ASP.NET Core, C#, and SQL Server. Built dynamic web interfaces with Angular and TypeScript, focused on optimizing user experience. Integrated REST services and JWT authentication to ensure security in platform access processes. Collaborated in migrating legacy systems to more scalable architectures, applying SOLID principles and Clean Architecture best practices.",
       "freelance": "As a versatile freelance full-stack developer and digital entrepreneur, I have architected and delivered e-commerce platforms and web applications—selling digital products and consulting services—using PHP (Laravel, CodeIgniter) and Python (Flask), with responsive front-ends built in HTML5, Tailwind CSS, and Vue.js/React; I've deployed and managed these solutions on Google Cloud Platform and cPanel hosting, automated CI/CD with Azure Pipelines and GitHub Actions, and implemented Python-based ETL and analytics scripts to ensure sub-200 ms response times, 99.5 %+ uptime, and seamless, data-driven user experiences.",

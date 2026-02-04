@@ -26,6 +26,7 @@
     "techStack": "Stack Tecnológico",
     "timeline": "Cronología de Experiencia",
     "positions": {
+      "eafit": "Desarrollador de Software",
       "intern": "Practicante de Desarrollo de Software",
       "fullstack": "Desarrollador Full Stack",
       "freelance": "Freelance",
@@ -34,6 +35,7 @@
       "trainee": "Aprendiz de Técnico en TI"
     },
     "descriptions": {
+      "eafit": "Desarrollo de agentes conversacionales con Microsoft Copilot Studio para atención automatizada a estudiantes, diseñando 4 flujos conversacionales con lógica de negocio y prompts optimizados. Desarrollo full-stack de portal web con Angular 20 (zoneless, Signals), TypeScript, RxJS y .NET Core. Integración de múltiples servicios de IA: Azure AI Foundry, OpenAI y Copilot Studio con BotFramework-WebChat. Implementación de telemetría empresarial con Azure Application Insights, cumpliendo GDPR, sistema de estados de chat con persistencia en localStorage, y autenticación corporativa con MSAL. Configuración de infraestructura en Azure (App Services, Application Insights, Bot Services).",
       "intern": "Diseñé y mantuve aplicaciones web y de escritorio en C# y ASP .NET, mejorando la funcionalidad y los procesos de soporte. Realicé ajustes de rendimiento y optimización de bases de datos para Microsoft SQL Server, reduciendo los tiempos de consulta hasta en un 30%. Proporcioné soporte técnico y capacitación a usuarios finales, asegurando una adopción fluida de las soluciones de software.",
       "fullstack": "Participé en el desarrollo e implementación de módulos internos para sistemas de gestión de inventario y control de iluminación, utilizando ASP.NET Core, C# y SQL Server. Construí interfaces web dinámicas con Angular y TypeScript, enfocándome en optimizar la experiencia del usuario. Integré servicios REST y autenticación JWT para garantizar la seguridad en los procesos de acceso a la plataforma. Colaboré en la migración de sistemas legacy a arquitecturas más escalables, aplicando principios SOLID y mejores prácticas de Clean Architecture.",
       "freelance": "Como desarrollador full-stack freelance versátil y emprendedor digital, he arquitecturado y entregado plataformas de e-commerce y aplicaciones web—vendiendo productos digitales y servicios de consultoría—usando PHP (Laravel, CodeIgniter) y Python (Flask), con front-ends responsivos construidos en HTML5, Tailwind CSS y Vue.js/React; he desplegado y gestionado estas soluciones en Google Cloud Platform y hosting cPanel, automatizado CI/CD con Azure Pipelines y GitHub Actions, e implementado scripts ETL y de análisis basados en Python para asegurar tiempos de respuesta sub-200 ms, 99.5%+ de uptime, y experiencias de usuario fluidas y basadas en datos.",
