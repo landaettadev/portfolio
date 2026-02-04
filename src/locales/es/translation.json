@@ -80,7 +80,15 @@
       },
       "smmPlatform": {
         "title": "Plataforma de Servicios SMM - 1popularity",
-        "description": "Sitio web multipropósito desarrollado en CodeIgniter (PHP + MySQL) para la promoción y gestión de servicios SMM. Incluye consumo de APIs de proveedores e integración de múltiples pasarelas de pago."
+        "description": "Sitio web multifuncional desarrollado en CodeIgniter (PHP + MySQL) para promoción y gestión de servicios SMM. Incluye consumo de APIs de proveedores e integración de múltiples pasarelas de pago."
+      },
+      "assistantPortal": {
+        "title": "Portal de asistentes",
+        "description": "Desarrollé sistema de telemetría con Azure Application Insights y gestión de estados de chat con indicadores visuales, retry automático y persistencia de estados para aplicación multi-plataforma de IA."
+      },
+      "certificatesAssistant": {
+        "title": "Asistente de certificados IA",
+        "description": "Diseñé agente conversacional con Microsoft Copilot Studio para automatizar consultas estudiantiles sobre certificados, implementando 4 flujos con prompts e instrucciones personalizadas que reducen carga operativa del área administrativa."
       }
     },
     "liveDemo": "Demo en Vivo"

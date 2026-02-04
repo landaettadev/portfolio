@@ -81,6 +81,14 @@
       "smmPlatform": {
         "title": "SMM Services Platform - 1popularity",
         "description": "Multi-purpose website developed in CodeIgniter (PHP + MySQL) for SMM services promotion and management. Includes provider API consumption and integration of multiple payment gateways."
+      },
+      "assistantPortal": {
+        "title": "AI Assistants Portal",
+        "description": "Developed telemetry system with Azure Application Insights and chat state management with visual indicators, automatic retry, and state persistence for multi-platform AI application."
+      },
+      "certificatesAssistant": {
+        "title": "AI Certificate Assistant",
+        "description": "Designed conversational agent with Microsoft Copilot Studio to automate student queries about certificates, implementing 4 flows with custom prompts and instructions that reduce operational workload in the administrative area."
       }
     },
     "liveDemo": "Live Demo"

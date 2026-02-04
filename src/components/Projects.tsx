@@ -85,6 +85,26 @@ const Projects: React.FC = () => {
       githubUrl: '',
       featured: true,
     },
+    {
+      id: 9,
+      title: t('projects.projects.assistantPortal.title'),
+      description: t('projects.projects.assistantPortal.description'),
+      image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      tech: ['Angular 20', 'TypeScript', '.NET Core', 'Azure AI', 'Application Insights'],
+      demoUrl: '',
+      githubUrl: '',
+      featured: true,
+    },
+    {
+      id: 10,
+      title: t('projects.projects.certificatesAssistant.title'),
+      description: t('projects.projects.certificatesAssistant.description'),
+      image: 'https://images.pexels.com/photos/8438918/pexels-photo-8438918.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      tech: ['Microsoft Copilot Studio', 'AI', 'Conversational Flows', 'Automation'],
+      demoUrl: '',
+      githubUrl: '',
+      featured: true,
+    },
   ];
 
   const containerVariants = {
