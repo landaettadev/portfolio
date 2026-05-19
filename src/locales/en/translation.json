@@ -10,15 +10,15 @@
   "hero": {
     "name": "Brandon",
     "lastName": "Landaetta",
-    "title": "Software Engineer",
-    "description": "Building scalable, elegant solutions that empower users and transform businesses.",
+    "title": "Senior Software Engineer · Full-Stack & AI",
+    "description": "Building scalable enterprise solutions with .NET, Angular, and React, and integrating AI on Azure and Google Cloud to transform businesses.",
     "downloadCV": "Download CV",
     "viewProjects": "View Projects",
     "scrollDown": "Scroll down"
   },
   "about": {
     "title": "About Me",
-    "description1": "I'm a passionate software engineer with over 5 years of experience building modern, user-focused web applications. I specialize in crafting elegant, performant interfaces that solve real problems.",
+    "description1": "I'm a software engineer with over 9 years of experience building enterprise full-stack solutions and integrating AI in production. I specialize in scalable architectures with .NET, Angular, and React, on Azure and Google Cloud Platform.",
     "description2": "My approach combines technical excellence with user empathy, ensuring that solutions are not only technically sound but also intuitive and accessible for all users.",
     "description3": "I'm constantly learning and exploring new technologies, with a focus on performance optimization, component architecture, and design systems.",
     "yearsExperience": "Years Experience",
@@ -26,6 +26,7 @@
     "techStack": "Tech Stack",
     "timeline": "Experience Timeline",
     "positions": {
+      "haceb": "Software Engineer",
       "eafit": "Software Developer",
       "intern": "Software Development",
       "fullstack": "Full Stack Developer",
@@ -35,6 +36,7 @@
       "trainee": "IT Technician Trainee"
     },
     "descriptions": {
+      "haceb": "Software Engineer at Industrias Haceb S.A., focused on the design, development, and implementation of scalable technology solutions for enterprise environments. Full-stack development with .NET, Java, Angular, and SQL Server, alongside cloud services on Azure and Google Cloud Platform (GCP). Involved in requirements analysis, API construction, system integration, internal process optimization, and business-oriented application development, applying best practices in performance, security, and maintainability under agile methodologies.",
       "eafit": "Developed conversational AI agents using Microsoft Copilot Studio for automated student support, designing 4 conversation flows with optimized business logic and prompts. Built a full-stack web portal with Angular 20 (zoneless, Signals), TypeScript, RxJS, and .NET Core. Integrated multiple AI services: Azure AI Foundry, OpenAI, and Copilot Studio with BotFramework-WebChat. Implemented enterprise telemetry with Azure Application Insights, ensuring GDPR compliance, chat state persistence system with localStorage, and corporate authentication with MSAL. Configured Azure infrastructure (App Services, Application Insights, Bot Services).",
       "intern": "Designed and maintained web and desktop applications in C# and ASP .NET, improving functionality and support processes. Conducted database performance tuning and optimization for Microsoft SQL Server, reducing query times by up to 30%. Provided technical support and training to end users, ensuring smooth adoption of software solutions.",
       "fullstack": "Participated in the development and implementation of internal modules for inventory management and lighting control systems, using ASP.NET Core, C#, and SQL Server. Built dynamic web interfaces with Angular and TypeScript, focused on optimizing user experience. Integrated REST services and JWT authentication to ensure security in platform access processes. Collaborated in migrating legacy systems to more scalable architectures, applying SOLID principles and Clean Architecture best practices.",
@@ -142,14 +144,14 @@
       "availability": "Availability"
     },
     "responses": {
-      "experience": "I have over 5 years of experience in software development, working with technologies like React, Angular, C#, Python, and PHP. I've developed web applications, enterprise systems, and AI solutions.",
-      "tech": "My tech stack includes React, Angular, TypeScript, C#, Python, PHP, Node.js, SQL Server, MySQL, and Google Cloud services. I also have experience with DevOps and CI/CD.",
+      "experience": "I have over 9 years of experience in software development. I currently work as a Software Engineer at Industrias Haceb, and previously at EAFIT I built conversational AI agents with Microsoft Copilot Studio and Azure AI. I've delivered enterprise full-stack solutions with .NET, Java, Angular, and React, plus web platforms and AI systems.",
+      "tech": "My stack includes .NET (C#, ASP.NET Core), Java, Angular (Signals, Zoneless), React, TypeScript, RxJS, Python, and PHP. In the cloud I work with Azure (App Services, AI Foundry, Application Insights, Bot Services) and Google Cloud (Cloud Run, BigQuery, Gemini). Databases: SQL Server, PostgreSQL, MySQL. Plus: Microsoft Copilot Studio, MSAL, Docker, GitHub Actions, and Azure DevOps.",
       "projects": "I've developed several notable projects: a Bitcoin ATM system, an AI-powered retail recommendation platform, automated reporting systems with AI, and e-commerce platforms.",
       "education": "I'm a Software Engineer with training in web development, databases, and modern technologies. I stay updated by constantly learning new technologies.",
       "location": "I currently work remotely and am available for projects worldwide. I have experience working with international teams.",
       "availability": "Yes! I'm available for new projects and opportunities. You can contact me through the contact form or directly by email. I'd love to hear about your project.",
       "freelance": "Yes, I work as a freelance developer and have delivered multiple successful projects. I have experience in e-commerce, web applications, and enterprise systems.",
-      "ai": "I have experience in AI projects, including recommendation systems, automated reporting with Gemini AI, and data analysis. I've worked with Google Cloud and AI APIs.",
+      "ai": "I have experience building production AI solutions: conversational agents with Microsoft Copilot Studio integrated with BotFramework-WebChat, recommendation systems, automated reporting with Gemini, and data analytics. I've worked with Azure AI Foundry, OpenAI, Google Cloud (Cloud Run, BigQuery), and enterprise telemetry with Application Insights under GDPR compliance.",
       "contact": "You can contact Brandon through:\n\n📧 Email: brandon@landaetta.dev\n📱 Phone: +57 300 636 1659\n\nHe's available for projects and collaborations. Feel free to reach out!",
       "email": "📧 Brandon's email: brandon@landaetta.dev\n\nHe responds quickly to professional inquiries and project proposals.",
       "phone": "📱 Brandon's phone: +57 300 636 1659\n\nYou can call or send a WhatsApp message. He's available during business hours.",

@@ -71,6 +71,13 @@ const Stack: React.FC = () => {
     { id: 36, name: 'Azure', icon: 'azure', category: 'devops' },
     { id: 37, name: 'Google Cloud', icon: 'gcp', category: 'devops' },
     { id: 38, name: 'cPanel', icon: 'cpanel', category: 'devops' },
+
+    // Enterprise & AI
+    { id: 39, name: 'Java', icon: 'java', category: 'backend' },
+    { id: 40, name: 'Copilot Studio', icon: 'copilot', category: 'backend' },
+    { id: 41, name: 'Azure AI Foundry', icon: 'aifoundry', category: 'backend' },
+    { id: 42, name: 'MSAL', icon: 'msal', category: 'backend' },
+    { id: 43, name: 'Application Insights', icon: 'appinsights', category: 'devops' },
   ];
 
   const categories = [

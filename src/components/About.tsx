@@ -23,27 +23,34 @@ const About: React.FC = () => {
   const timelineItems: TimelineItem[] = [
     {
       id: 1,
-      year: '09/25 - Present',
+      year: '04/26 - Present',
+      title: t('about.positions.haceb'),
+      description: t('about.descriptions.haceb'),
+      icon: <Briefcase size={20} />,
+    },
+    {
+      id: 2,
+      year: '09/25 - 04/26',
       title: t('about.positions.eafit'),
       description: t('about.descriptions.eafit'),
       icon: <Briefcase size={20} />,
     },
     {
-      id: 2,
+      id: 3,
       year: 'Jul 2024 – Jan 2025',
       title: t('about.positions.intern'),
       description: t('about.descriptions.intern'),
       icon: <Briefcase size={20} />,
     },
     {
-      id: 3,
+      id: 4,
       year: '2020 - 2023',
       title: t('about.positions.fullstack'),
       description: t('about.descriptions.fullstack'),
       icon: <Briefcase size={20} />,
     },
     {
-      id: 4,
+      id: 5,
       year: '2019 - Present',
       title: t('about.positions.freelance'),
       description: t('about.descriptions.freelance'),
@@ -51,21 +58,21 @@ const About: React.FC = () => {
       link: 'landaettadev.com',
     },
     {
-      id: 5,
+      id: 6,
       year: '2018 - 2020',
       title: t('about.positions.analyst'),
       description: t('about.descriptions.analyst'),
       icon: <Briefcase size={20} />,
     },
     {
-      id: 6,
+      id: 7,
       year: '2017-2018',
       title: t('about.positions.junior'),
       description: t('about.descriptions.junior'),
       icon: <GraduationCap size={20} />,
     },
     {
-      id: 7,
+      id: 8,
       year: '2015',
       title: t('about.positions.trainee'),
       description: t('about.descriptions.trainee'),
@@ -113,7 +120,7 @@ const About: React.FC = () => {
             
             <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
               <div className="card flex flex-col items-center p-4">
-                <span className="text-2xl font-bold text-gradient">5+</span>
+                <span className="text-2xl font-bold text-gradient">9+</span>
                 <span className="text-sm text-text-muted mt-2">{t('about.yearsExperience')}</span>
               </div>
               <div className="card flex flex-col items-center p-4">

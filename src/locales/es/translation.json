@@ -10,15 +10,15 @@
   "hero": {
     "name": "Brandon",
     "lastName": "Landaetta",
-    "title": "Ingeniero de Software",
-    "description": "Construyendo soluciones escalables y elegantes que empoderan a los usuarios y transforman negocios.",
+    "title": "Senior Software Engineer · Full-Stack & AI",
+    "description": "Construyendo soluciones empresariales escalables con .NET, Angular y React, e integrando IA sobre Azure y Google Cloud para transformar negocios.",
     "downloadCV": "Descargar CV",
     "viewProjects": "Ver Proyectos",
     "scrollDown": "Desplázate hacia abajo"
   },
   "about": {
     "title": "Acerca de Mí",
-    "description1": "Soy un ingeniero de software apasionado con más de 5 años de experiencia construyendo aplicaciones web modernas y centradas en el usuario. Me especializo en crear interfaces elegantes y eficientes que resuelven problemas reales.",
+    "description1": "Soy ingeniero de software con más de 9 años de experiencia construyendo soluciones empresariales full-stack e integrando IA en producción. Me especializo en arquitecturas escalables con .NET, Angular y React, sobre Azure y Google Cloud Platform.",
     "description2": "Mi enfoque combina excelencia técnica con empatía hacia el usuario, asegurando que las soluciones no solo sean técnicamente sólidas sino también intuitivas y accesibles para todos los usuarios.",
     "description3": "Estoy constantemente aprendiendo y explorando nuevas tecnologías, con un enfoque en optimización de rendimiento, arquitectura de componentes y sistemas de diseño.",
     "yearsExperience": "Años de Experiencia",
@@ -26,6 +26,7 @@
     "techStack": "Stack Tecnológico",
     "timeline": "Cronología de Experiencia",
     "positions": {
+      "haceb": "Ingeniero de Software",
       "eafit": "Desarrollador de Software",
       "intern": "Desarrollo de Software",
       "fullstack": "Desarrollador Full Stack",
@@ -35,6 +36,7 @@
       "trainee": "Aprendiz de Técnico en TI"
     },
     "descriptions": {
+      "haceb": "Ingeniero de Software en Industrias Haceb S.A., enfocado en el diseño, desarrollo e implementación de soluciones tecnológicas escalables para entornos corporativos. Desarrollo full-stack con .NET, Java, Angular y SQL Server, junto a servicios en la nube sobre Azure y Google Cloud Platform (GCP). Participación en análisis de requerimientos, construcción de APIs, integración entre sistemas, optimización de procesos internos y desarrollo de aplicaciones orientadas a negocio, aplicando buenas prácticas de rendimiento, seguridad y mantenibilidad bajo metodologías ágiles.",
       "eafit": "Desarrollo de agentes conversacionales con Microsoft Copilot Studio para atención automatizada a estudiantes, diseñando 4 flujos conversacionales con lógica de negocio y prompts optimizados. Desarrollo full-stack de portal web con Angular 20 (zoneless, Signals), TypeScript, RxJS y .NET Core. Integración de múltiples servicios de IA: Azure AI Foundry, OpenAI y Copilot Studio con BotFramework-WebChat. Implementación de telemetría empresarial con Azure Application Insights, cumpliendo GDPR, sistema de estados de chat con persistencia en localStorage, y autenticación corporativa con MSAL. Configuración de infraestructura en Azure (App Services, Application Insights, Bot Services).",
       "intern": "Diseñé y mantuve aplicaciones web y de escritorio en C# y ASP .NET, mejorando la funcionalidad y los procesos de soporte. Realicé ajustes de rendimiento y optimización de bases de datos para Microsoft SQL Server, reduciendo los tiempos de consulta hasta en un 30%. Proporcioné soporte técnico y capacitación a usuarios finales, asegurando una adopción fluida de las soluciones de software.",
       "fullstack": "Participé en el desarrollo e implementación de módulos internos para sistemas de gestión de inventario y control de iluminación, utilizando ASP.NET Core, C# y SQL Server. Construí interfaces web dinámicas con Angular y TypeScript, enfocándome en optimizar la experiencia del usuario. Integré servicios REST y autenticación JWT para garantizar la seguridad en los procesos de acceso a la plataforma. Colaboré en la migración de sistemas legacy a arquitecturas más escalables, aplicando principios SOLID y mejores prácticas de Clean Architecture.",
@@ -142,14 +144,14 @@
       "availability": "Disponibilidad"
     },
     "responses": {
-      "experience": "Tengo más de 5 años de experiencia en desarrollo de software, trabajando con tecnologías como React, Angular, C#, Python y PHP. He desarrollado aplicaciones web, sistemas empresariales y soluciones de IA.",
-      "tech": "Mi stack tecnológico incluye React, Angular, TypeScript, C#, Python, PHP, Node.js, SQL Server, MySQL, y servicios de Google Cloud. También tengo experiencia con DevOps y CI/CD.",
+      "experience": "Tengo más de 9 años de experiencia en desarrollo de software. Actualmente trabajo como Ingeniero de Software en Industrias Haceb, y previamente en EAFIT desarrollé agentes conversacionales con Microsoft Copilot Studio y Azure AI. He construido soluciones empresariales full-stack con .NET, Java, Angular y React, además de plataformas web y sistemas de IA.",
+      "tech": "Mi stack incluye .NET (C#, ASP.NET Core), Java, Angular (Signals, Zoneless), React, TypeScript, RxJS, Python y PHP. En la nube trabajo con Azure (App Services, AI Foundry, Application Insights, Bot Services) y Google Cloud (Cloud Run, BigQuery, Gemini). Bases de datos: SQL Server, PostgreSQL, MySQL. Además: Microsoft Copilot Studio, MSAL, Docker, GitHub Actions y Azure DevOps.",
       "projects": "He desarrollado varios proyectos destacados: un sistema de cajero Bitcoin, una plataforma de recomendaciones IA para retail, sistemas de reportes automatizados con IA, y plataformas de e-commerce.",
       "education": "Soy Ingeniero de Software con formación en desarrollo web, bases de datos, y tecnologías modernas. Me mantengo actualizado constantemente aprendiendo nuevas tecnologías.",
       "location": "Actualmente trabajo de forma remota y estoy disponible para proyectos en cualquier parte del mundo. Tengo experiencia trabajando con equipos internacionales.",
       "availability": "¡Sí! Estoy disponible para nuevos proyectos y oportunidades. Puedes contactarme a través del formulario de contacto o directamente por email. Me encantaría escuchar sobre tu proyecto.",
       "freelance": "Sí, trabajo como desarrollador freelance y he entregado múltiples proyectos exitosos. Tengo experiencia en e-commerce, aplicaciones web, y sistemas empresariales.",
-      "ai": "Tengo experiencia en proyectos de IA, incluyendo sistemas de recomendaciones, reportes automatizados con Gemini AI, y análisis de datos. He trabajado con Google Cloud y APIs de IA.",
+      "ai": "Tengo experiencia construyendo soluciones de IA en producción: agentes conversacionales con Microsoft Copilot Studio integrados con BotFramework-WebChat, sistemas de recomendaciones, reportes automatizados con Gemini, y análisis de datos. He trabajado con Azure AI Foundry, OpenAI, Google Cloud (Cloud Run, BigQuery) y telemetría empresarial con Application Insights cumpliendo GDPR.",
       "contact": "Puedes contactar a Brandon a través de:\n\n📧 Email: brandon@landaetta.dev\n📱 Teléfono: +57 300 636 1659\n\nEstá disponible para proyectos y colaboraciones. ¡No dudes en contactarlo!",
       "email": "📧 Email de Brandon: brandon@landaetta.dev\n\nResponde rápidamente a consultas profesionales y propuestas de proyectos.",
       "phone": "📱 Teléfono de Brandon: +57 300 636 1659\n\nPuedes llamar o enviar un mensaje de WhatsApp. Está disponible en horario laboral.",
