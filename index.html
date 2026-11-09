@@ -5,47 +5,73 @@
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FMJJXZFQXH"></script>
+    <!-- Google tag: loaded after the page is interactive so it never competes with first render -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-FMJJXZFQXH');
+      (function () {
+        var done = false;
+        var inject = function () {
+          if (done) return;
+          done = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-FMJJXZFQXH';
+          document.head.appendChild(s);
+        };
+        ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (e) {
+          window.addEventListener(e, inject, { once: true, passive: true });
+        });
+        window.addEventListener('load', function () { setTimeout(inject, 6000); });
+      })();
     </script>
     
     <!-- Primary Meta Tags -->
-    <title>Brandon Landaetta - Software Engineer Portfolio</title>
-    <meta name="title" content="Brandon Landaetta - Software Engineer Portfolio" />
-    <meta name="description" content="Senior Front-End Developer & Software Engineer Portfolio - Building scalable, elegant solutions that empower users and transform businesses." />
-    <meta name="keywords" content="software engineer, frontend developer, react, typescript, web development, portfolio" />
+    <title>Brandon Landaetta — Senior Software Engineer · AI & Cloud</title>
+    <meta name="description" content="Senior Software Engineer building web applications, cloud platforms and AI agents. Full-stack web development with .NET, Angular and React on Azure and Google Cloud." />
+    <meta name="keywords" content="Brandon Landaetta, senior software engineer, web development, web applications, AI agents, Copilot Studio, Azure, Google Cloud, .NET, Angular, React, full-stack, Medellín, Colombia" />
     <meta name="author" content="Brandon Landaetta" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://brandonlandaetta.dev" />
-    <meta property="og:title" content="Brandon Landaetta - Software Engineer Portfolio" />
-    <meta property="og:description" content="Building scalable, elegant solutions that empower users and transform businesses." />
-    <meta property="og:image" content="https://brandonlandaetta.dev/og-image.jpg" />
-    <meta property="og:site_name" content="Brandon Landaetta Portfolio" />
-    
+    <link rel="canonical" href="https://landaetta.dev/" />
+    <link rel="alternate" hreflang="en" href="https://landaetta.dev/" />
+    <link rel="alternate" hreflang="es" href="https://landaetta.dev/" />
+    <link rel="alternate" hreflang="x-default" href="https://landaetta.dev/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://landaetta.dev/" />
+    <meta property="og:site_name" content="Brandon Landaetta" />
+    <meta property="og:title" content="Brandon Landaetta — Senior Software Engineer · AI & Cloud" />
+    <meta property="og:description" content="Building web applications, cloud platforms and AI agents. Full-stack .NET, Angular and React on Azure and Google Cloud." />
+    <meta property="og:image" content="https://landaetta.dev/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Brandon Landaetta, Senior Software Engineer — illustration of a developer working at night" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_CO" />
+    <meta property="profile:first_name" content="Brandon" />
+    <meta property="profile:last_name" content="Landaetta" />
+
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://brandonlandaetta.dev" />
-    <meta property="twitter:title" content="Brandon Landaetta - Software Engineer Portfolio" />
-    <meta property="twitter:description" content="Building scalable, elegant solutions that empower users and transform businesses." />
-    <meta property="twitter:image" content="https://brandonlandaetta.dev/og-image.jpg" />
-    
-    <!-- Additional SEO -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Brandon Landaetta — Senior Software Engineer · AI & Cloud" />
+    <meta name="twitter:description" content="Building web applications, cloud platforms and AI agents." />
+    <meta name="twitter:image" content="https://landaetta.dev/og-image.png" />
+
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#1f2937" />
-    <link rel="canonical" href="https://brandonlandaetta.dev" />
-    
+    <meta name="theme-color" content="#0A0618" />
+    <meta name="color-scheme" content="dark" />
+
+    <link rel="preload" as="image" href="/assets/index.webp" type="image/webp" fetchpriority="high" />
+
     <!-- Preload Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Non-blocking fonts: system fallback paints first, web fonts swap in -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" /></noscript>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -53,21 +79,27 @@
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Brandon Landaetta",
-      "jobTitle": "Software Engineer",
-      "description": "Building scalable, elegant solutions that empower users and transform businesses.",
-      "url": "https://brandonlandaetta.dev",
-      "email": "brandon@landaetta.dev",
+      "jobTitle": "Senior Software Engineer",
+      "description": "Software engineer building web applications, cloud platforms and AI agents.",
+      "url": "https://landaetta.dev/",
+      "image": "https://landaetta.dev/og-image.png",
+      "email": "mailto:brandon@landaetta.dev",
       "telephone": "+573006361659",
+      "address": { "@type": "PostalAddress", "addressLocality": "Medellín", "addressCountry": "CO" },
+      "worksFor": { "@type": "Organization", "name": "Industrias Haceb S.A." },
       "sameAs": [
-        "https://www.linkedin.com/in/brandon-landaetta-70340ba2/"
+        "https://www.linkedin.com/in/brandon-landaetta-70340ba2/",
+        "https://github.com/landaettadev"
       ],
       "knowsAbout": [
-        "React", "TypeScript", "JavaScript", "Node.js", "Python", "C#", "ASP.NET", "SQL"
+        "Web development", "Web applications", "AI agents", "Generative AI", "Microsoft Copilot Studio", "Azure AI Foundry", "Microsoft Azure",
+        "Google Cloud", "BigQuery", ".NET", "C#", "Angular", "React", "TypeScript", "Python", "SQL Server"
       ]
     }
     </script>
   </head>
   <body class="bg-bg-primary text-text-main">
+    <noscript><p style="padding:24px;color:#eeeafb;font-family:system-ui">Brandon Landaetta — Senior Software Engineer. Contact: brandon@landaetta.dev</p></noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

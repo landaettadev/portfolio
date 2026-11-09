@@ -5,38 +5,34 @@ interface UseScrollSpyOptions {
   offset?: number;
 }
 
+/**
+ * Returns the id of the last section whose top has scrolled past `offset`.
+ * Looks elements up on every scroll so it works with lazily rendered sections.
+ */
 export const useScrollSpy = ({ ids, offset = 100 }: UseScrollSpyOptions) => {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: `-${offset}px 0px -${offset}px 0px`,
-        threshold: 0.1,
+    let raf = 0;
+    const update = () => {
+      let current: string | null = null;
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top - offset <= 0) current = id;
       }
-    );
-
-    ids.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
+      setActiveId(current);
+    };
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
     return () => {
-      ids.forEach((id) => {
-        const element = document.getElementById(id);
-        if (element) {
-          observer.unobserve(element);
-        }
-      });
+      cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
     };
   }, [ids, offset]);
 

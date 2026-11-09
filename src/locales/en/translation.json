@@ -5,20 +5,36 @@
     "stack": "Stack",
     "projects": "Projects",
     "contact": "Contact",
-    "downloadCV": "Download CV"
+    "downloadCV": "Download CV",
+    "ai": "AI & Cloud",
+    "search": "Search or ask",
+    "menu": "Open menu"
   },
   "hero": {
     "name": "Brandon",
     "lastName": "Landaetta",
-    "title": "Senior Software Engineer · Full-Stack & AI",
-    "description": "Building scalable enterprise solutions with .NET, Angular, and React, and integrating AI on Azure and Google Cloud to transform businesses.",
+    "title": "I build enterprise software with generative AI, on Azure and Google Cloud.",
+    "description": "Experience in full-stack web development with .NET, Angular and React: enterprise web apps, portals and APIs, architectures on Azure and Google Cloud, and AI solutions in production.",
     "downloadCV": "Download CV",
-    "viewProjects": "View Projects",
-    "scrollDown": "Scroll down"
+    "viewProjects": "View projects",
+    "scrollDown": "Scroll down",
+    "available": "Open to new challenges",
+    "askLabel": "Ask my agent",
+    "askButton": "Ask",
+    "questions": [
+      "What AI agents have you built?",
+      "How did your certificates agent work?",
+      "Which Azure services do you use?",
+      "Are you available for hire?"
+    ],
+    "clouds": "Running in production on",
+    "role": "Senior Software Engineer",
+    "tagline": "Building web applications, cloud platforms & AI agents.",
+    "askHint": "Or ask my agent about my experience:"
   },
   "about": {
     "title": "About Me",
-    "description1": "I'm a software engineer with over 9 years of experience building enterprise full-stack solutions and integrating AI in production. I specialize in scalable architectures with .NET, Angular, and React, on Azure and Google Cloud Platform.",
+    "description1": "I'm a software engineer with experience building enterprise full-stack solutions and integrating AI in production. I specialize in scalable architectures with .NET, Angular, and React, on Azure and Google Cloud Platform.",
     "description2": "My approach combines technical excellence with user empathy, ensuring that solutions are not only technically sound but also intuitive and accessible for all users.",
     "description3": "I'm constantly learning and exploring new technologies, with a focus on performance optimization, component architecture, and design systems.",
     "yearsExperience": "Years Experience",
@@ -36,7 +52,7 @@
       "trainee": "IT Technician Trainee"
     },
     "descriptions": {
-      "haceb": "Software Engineer at Industrias Haceb S.A., focused on the design, development, and implementation of scalable technology solutions for enterprise environments. Full-stack development with .NET, Java, Angular, and SQL Server, alongside cloud services on Azure and Google Cloud Platform (GCP). Involved in requirements analysis, API construction, system integration, internal process optimization, and business-oriented application development, applying best practices in performance, security, and maintainability under agile methodologies.",
+      "haceb": "Software Engineer at Industrias Haceb S.A., focused on the design, development, and implementation of scalable technology solutions for enterprise environments. Full-stack development with .NET, Angular, and SQL Server, alongside cloud services on Azure and Google Cloud Platform (GCP). Involved in requirements analysis, API construction, system integration, internal process optimization, and business-oriented application development, applying best practices in performance, security, and maintainability under agile methodologies.",
       "eafit": "Developed conversational AI agents using Microsoft Copilot Studio for automated student support, designing 4 conversation flows with optimized business logic and prompts. Built a full-stack web portal with Angular 20 (zoneless, Signals), TypeScript, RxJS, and .NET Core. Integrated multiple AI services: Azure AI Foundry, OpenAI, and Copilot Studio with BotFramework-WebChat. Implemented enterprise telemetry with Azure Application Insights, ensuring GDPR compliance, chat state persistence system with localStorage, and corporate authentication with MSAL. Configured Azure infrastructure (App Services, Application Insights, Bot Services).",
       "intern": "Designed and maintained web and desktop applications in C# and ASP .NET, improving functionality and support processes. Conducted database performance tuning and optimization for Microsoft SQL Server, reducing query times by up to 30%. Provided technical support and training to end users, ensuring smooth adoption of software solutions.",
       "fullstack": "Participated in the development and implementation of internal modules for inventory management and lighting control systems, using ASP.NET Core, C#, and SQL Server. Built dynamic web interfaces with Angular and TypeScript, focused on optimizing user experience. Integrated REST services and JWT authentication to ensure security in platform access processes. Collaborated in migrating legacy systems to more scalable architectures, applying SOLID principles and Clean Architecture best practices.",
@@ -77,8 +93,8 @@
         "description": "Custom system for automated report creation, integrated with generative AI using APIs and Google Cloud services in Python and SQL (Cloud Run, Gemini, Storage, BigQuery)."
       },
       "digitalGames": {
-        "title": "Digital Games Store - DigitalDeluxes",
-        "description": "Digital video game sales website developed in pure PHP and MySQL, with Kinguin API consumption and multiple payment gateway integration (Coinpal, Payeer, Wompi, MercadoPago)."
+        "title": "Digital Game Key Marketplace - PopularKeys",
+        "description": "Modern game key marketplace built with Next.js and NestJS, integrating the Kinguin catalog with PostgreSQL, Redis, MeiliSearch, Wompi and CoinPal payments."
       },
       "smmPlatform": {
         "title": "SMM Services Platform - 1popularity",
@@ -102,9 +118,12 @@
       "subjectPlaceholder": "Project Inquiry",
       "messagePlaceholder": "Tell me about your project...",
       "sendButton": "Send Message",
-      "sending": "Sending...",
-      "success": "Your message has been sent successfully!",
-      "error": "Something went wrong. Please try again later."
+      "sending": "Sending…",
+      "success": "Message sent. I'll get back to you as soon as possible.",
+      "error": "The message couldn't be sent. Please try again or email brandon@landaetta.dev.",
+      "required": "This field is required.",
+      "invalidEmail": "Enter a valid email, for example name@company.com.",
+      "tooShort": "Tell me a bit more (at least 10 characters)."
     }
   },
   "footer": {
@@ -118,13 +137,13 @@
     "welcome": "Hello! I'm Brandon's assistant. How can I help you today?",
     "welcomeMessage": "👋 Hi! I'm Brandon's AI assistant. Ask me anything about his experience, projects, or skills!",
     "floatingMessage": "I'm Brandon's AI Assistant! Ask me anything! 🤖",
-    "placeholder": "Type your question...",
+    "placeholder": "Type your question…",
     "you": "You",
     "assistant": "Assistant",
-    "open": "Open AI Assistant",
-    "close": "Close chat",
-    "send": "Send message",
-    "clearChat": "Clear chat",
+    "open": "Open agent",
+    "close": "Close agent",
+    "send": "Send",
+    "clearChat": "New conversation",
     "openWhatsApp": "Open WhatsApp chat",
     "quickSuggestions": "Quick questions:",
     "suggestions": {
@@ -144,14 +163,14 @@
       "availability": "Availability"
     },
     "responses": {
-      "experience": "I have over 9 years of experience in software development. I currently work as a Software Engineer at Industrias Haceb, and previously at EAFIT I built conversational AI agents with Microsoft Copilot Studio and Azure AI. I've delivered enterprise full-stack solutions with .NET, Java, Angular, and React, plus web platforms and AI systems.",
-      "tech": "My stack includes .NET (C#, ASP.NET Core), Java, Angular (Signals, Zoneless), React, TypeScript, RxJS, Python, and PHP. In the cloud I work with Azure (App Services, AI Foundry, Application Insights, Bot Services) and Google Cloud (Cloud Run, BigQuery, Gemini). Databases: SQL Server, PostgreSQL, MySQL. Plus: Microsoft Copilot Studio, MSAL, Docker, GitHub Actions, and Azure DevOps.",
+      "experience": "I have experience in software development. I currently work as a Software Engineer at Industrias Haceb, and previously at EAFIT I built conversational AI agents with Microsoft Copilot Studio and Azure AI. I've delivered enterprise full-stack solutions with .NET, Angular, and React, plus web platforms and AI systems.",
+      "tech": "My stack includes .NET (C#, ASP.NET Core), Angular (Signals, Zoneless), React, TypeScript, RxJS, Python, and PHP. In the cloud I work with Azure (App Services, AI Foundry, Application Insights, Bot Services) and Google Cloud (Cloud Run, BigQuery, Gemini). Databases: SQL Server, PostgreSQL, MySQL. Plus: Microsoft Copilot Studio, MSAL, Docker, GitHub Actions, and Azure DevOps.",
       "projects": "I've developed several notable projects: a Bitcoin ATM system, an AI-powered retail recommendation platform, automated reporting systems with AI, and e-commerce platforms.",
       "education": "I'm a Software Engineer with training in web development, databases, and modern technologies. I stay updated by constantly learning new technologies.",
       "location": "I currently work remotely and am available for projects worldwide. I have experience working with international teams.",
       "availability": "Yes! I'm available for new projects and opportunities. You can contact me through the contact form or directly by email. I'd love to hear about your project.",
       "freelance": "Yes, I work as a freelance developer and have delivered multiple successful projects. I have experience in e-commerce, web applications, and enterprise systems.",
-      "ai": "I have experience building production AI solutions: conversational agents with Microsoft Copilot Studio integrated with BotFramework-WebChat, recommendation systems, automated reporting with Gemini, and data analytics. I've worked with Azure AI Foundry, OpenAI, Google Cloud (Cloud Run, BigQuery), and enterprise telemetry with Application Insights under GDPR compliance.",
+      "ai": "I built a Copilot Studio agent for Microsoft Teams that advises EAFIT students on certificates: it reports the status of their request, hands over the download code when available and validates whether the student is on the Sapiencia lists. I have also built automated reports with Gemini and BigQuery, ML recommendation systems and GDPR-compliant telemetry with Application Insights.",
       "contact": "You can contact Brandon through:\n\n📧 Email: brandon@landaetta.dev\n📱 Phone: +57 300 636 1659\n\nHe's available for projects and collaborations. Feel free to reach out!",
       "email": "📧 Brandon's email: brandon@landaetta.dev\n\nHe responds quickly to professional inquiries and project proposals.",
       "phone": "📱 Brandon's phone: +57 300 636 1659\n\nYou can call or send a WhatsApp message. He's available during business hours.",
@@ -159,6 +178,160 @@
       "cv": "📄 You can download Brandon's CV in two ways:\n\n1. Click the 'Download CV' button in the header\n2. Direct link: https://landaetta.dev/cv-en.pdf\n\nHis CV includes his full experience, projects, and skills.",
       "download": "📥 To download Brandon's CV:\n\n• Click the 'Download CV' button in the navigation header\n• Or visit: https://landaetta.dev/cv-en.pdf\n\nHis CV is updated with his latest projects and skills.",
       "default": "Hello! I'm Brandon's assistant. I can answer questions about his experience, projects, technologies, and availability. How can I help you?"
+    },
+    "agentName": "Brandon's agent",
+    "statusRemote": "Claude · online",
+    "statusLocal": "Local engine · knowledge base",
+    "statusReady": "Ready to answer",
+    "sourcesLabel": "Sources:",
+    "launcherTip": "AI agent · Ask me",
+    "emptyTitle": "Ask anything about Brandon.",
+    "emptyBody": "I answer from his real experience: AI agents, cloud, projects and availability.",
+    "disclaimer": "Answers are based on Brandon's profile. For anything specific, reach him directly."
+  },
+  "ai": {
+    "title": "How an agent I built works",
+    "lede": "At EAFIT I built a Copilot Studio agent for Microsoft Teams that advises students on certificates: it checks the status of their request, hands over the download code when it is ready and validates whether they appear on the Sapiencia lists. All of it measured with Application Insights.",
+    "replay": "Replay the trace",
+    "question": "Hi, what is the status of my transcript certificate?",
+    "answer": "Your request is approved: download it with code CERT-8F3K-2Q. I also confirmed you are on the current Sapiencia list.",
+    "nodes": {
+      "user": {
+        "title": "Student",
+        "detail": "Chat in Microsoft Teams"
+      },
+      "agent": {
+        "title": "Agent",
+        "detail": "Copilot Studio, \"certificate status\" topic"
+      },
+      "llm": {
+        "title": "Answer",
+        "detail": "Generative answers with Azure OpenAI"
+      },
+      "obs": {
+        "title": "Telemetry",
+        "detail": "Application Insights, GDPR compliant"
+      },
+      "tramite": {
+        "title": "Request status",
+        "detail": ".NET API: status and download code"
+      },
+      "sapiencia": {
+        "title": "Sapiencia lists",
+        "detail": "Checks whether the student is a beneficiary"
+      }
+    },
+    "cards": {
+      "agents": {
+        "title": "Conversational agents",
+        "body": "A Teams agent that advises on certificates: reports request status, hands over the download code and validates the Sapiencia lists. Flows with business logic and tuned prompts."
+      },
+      "genai": {
+        "title": "Generative AI on data",
+        "body": "Reports that write themselves: Gemini reads BigQuery from Cloud Run and delivers business-ready reports."
+      },
+      "cloud": {
+        "title": "End-to-end cloud",
+        "body": "App Services, Bot Services and AI Foundry on Azure; Cloud Run, BigQuery and Storage on GCP. CI/CD with GitHub Actions and Azure DevOps."
+      },
+      "fullstack": {
+        "title": "Full-stack web applications",
+        "body": "Web apps and portals in Angular (Signals) and React on secure .NET APIs: system integrations, corporate sign-in and tuned SQL Server."
+      },
+      "ml": {
+        "title": "ML recommendations",
+        "body": "\"Just for you\" retail module: Python models over Teradata served to a React app."
+      }
+    },
+    "simulated": "Simulated trace with sample data",
+    "tryAgent": "Try the agent",
+    "capabilitiesTitle": "What I build",
+    "flowLabel": "Agent workflow"
+  },
+  "stats": {
+    "years": "years in production",
+    "agents": "agent flows deployed",
+    "clouds": "clouds: Azure and GCP",
+    "query": "faster SQL queries"
+  },
+  "palette": {
+    "placeholder": "Type a command or a question…",
+    "navigate": "Go to",
+    "actions": "Actions",
+    "ask": "Ask the agent",
+    "downloadCV": "Download CV",
+    "copyEmail": "Copy email",
+    "copied": "Email copied",
+    "switchLang": "Cambiar a español",
+    "github": "Open GitHub",
+    "linkedin": "Open LinkedIn",
+    "empty": "No matches. Press Enter to ask the agent."
+  },
+  "stackExtra": {
+    "lede": "The tools I have shipped production software with, grouped by the layer they live in.",
+    "ai": "AI",
+    "cloud": "Cloud"
+  },
+  "aboutExtra": {
+    "lede": "From AS/400 support to AI agents in the cloud: a career built by shipping.",
+    "showMore": "Show more",
+    "showLess": "Show less",
+    "current": "Current"
+  },
+  "projectsExtra": {
+    "lede": "Systems I designed and took to production, from crypto payments to AI reporting.",
+    "range": "AI, payments and platforms. Built end to end.",
+    "concept": "Concept illustration",
+    "spotlight": "In focus",
+    "details": "Explore the build",
+    "stack": "Technology stack",
+    "visit": "Visit website",
+    "footer": "More code, experiments and things I build.",
+    "categories": {
+      "ai": "Generative AI / Cloud",
+      "fintech": "Fintech / Crypto",
+      "ml": "Machine learning / Retail",
+      "commerce": "E-commerce / Gaming",
+      "platform": "Platforms / Integrations",
+      "enterprise": "Enterprise / Full stack"
+    },
+    "items": {
+      "aiReports": {
+        "title": "Data in. Reports out.",
+        "summary": "An automated reporting system that connects business data with generative AI, built on Google Cloud.",
+        "alt": "Concept of a report workspace connecting BigQuery, Gemini and an automatically generated document."
+      },
+      "bitcoinATM": {
+        "title": "Bitcoin, beyond the exchange.",
+        "summary": "ATM-style software that brings cryptocurrency transactions into a familiar flow, powered by CoinPayments.",
+        "alt": "Concept of a Bitcoin kiosk with a transaction interface and connected payment services."
+      },
+      "aiRetail": {
+        "title": "A store that gets you.",
+        "summary": "“Just for You”: a retail recommendation module connecting machine learning models to a personalized shopping experience.",
+        "alt": "Concept of personalized product recommendations connected to a machine learning model."
+      },
+      "digitalGames": {
+        "title": "PopularKeys",
+        "summary": "A modern marketplace for digital game keys, connecting the Kinguin catalog with search, wallet and multiple payment flows.",
+        "alt": "Concept of the PopularKeys digital game key marketplace with abstract game covers and checkout."
+      },
+      "smmPlatform": {
+        "title": "1popularity",
+        "summary": "A platform for promoting and managing SMM services, connecting providers, orders and payment gateways.",
+        "alt": "Concept of the 1popularity service management workspace and provider integrations."
+      },
+      "enterpriseProjects": {
+        "title": "The systems behind the business.",
+        "summary": "Development and support across enterprise applications: interfaces, business logic, databases and integrations.",
+        "alt": "Concept of connected enterprise architecture from Angular and MVC to .NET and SQL."
+      }
     }
+  },
+  "cta": {
+    "title": "Got a process an agent could handle?",
+    "body": "I design and build production-ready agents, integrations and cloud platforms. Share the context and let's talk about the best way to approach it.",
+    "primary": "Let's talk about your project",
+    "secondary": "Ask the agent"
   }
 }
