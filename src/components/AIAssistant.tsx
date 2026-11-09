@@ -1,527 +1,458 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Send, Bot, X, User, Trash2, MessageSquare } from 'lucide-react';
-import { CONTACT_INFO } from '../constants';
+import { ArrowUp, Check, CornerDownRight, FileDown, Mail, MessageCircle, RotateCcw, Sparkles, X, ArrowRight } from 'lucide-react';
 import { analytics } from '../utils/analytics';
-import type { Message } from '../types';
+import { runAgent, planSteps, type AgentReply } from '../utils/agentEngine';
+import { INTENTS, START_CHIPS, type KAction, type Lang } from '../data/knowledge';
+import { prefersReducedMotion, scrollToSection } from '../hooks/useSpotlight';
 
-const QUICK_SUGGESTIONS = [
-  { key: 'experience', icon: '💼' },
-  { key: 'tech', icon: '🛠️' },
-  { key: 'projects', icon: '🚀' },
-  { key: 'contact', icon: '📧' },
-  { key: 'cv', icon: '📄' },
-  { key: 'availability', icon: '✅' },
-];
+interface ChatMsg {
+  id: string;
+  role: 'user' | 'assistant';
+  text: string;
+  steps?: string[];
+  stepsDone?: number;
+  sources?: string[];
+  followups?: AgentReply['followups'];
+  actions?: KAction[];
+  streaming?: boolean;
+}
+
+type Mode = 'unknown' | 'remote' | 'local';
+
+const uid = () => Math.random().toString(36).slice(2, 10);
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** **bold**, line breaks and "•" bullets — the only formatting the agent uses. */
+const RichText: React.FC<{ text: string }> = ({ text }) => (
+  <>
+    {text.split('\n').map((line, i) => {
+      const bullet = line.trimStart().startsWith('•') || line.trimStart().startsWith('- ');
+      const content = bullet ? line.trimStart().replace(/^(•|-)\s*/, '') : line;
+      const parts = content.split(/(\*\*[^*]+\*\*)/g).map((p, j) =>
+        p.startsWith('**') && p.endsWith('**') ? (
+          <strong key={j} className="font-semibold text-white">
+            {p.slice(2, -2)}
+          </strong>
+        ) : (
+          <React.Fragment key={j}>{p}</React.Fragment>
+        )
+      );
+      if (!line.trim()) return <div key={i} className="h-2" />;
+      return bullet ? (
+        <div key={i} className="flex gap-2 pl-1">
+          <span className="mt-[0.6em] h-1 w-1 shrink-0 rounded-full bg-glow" />
+          <span>{parts}</span>
+        </div>
+      ) : (
+        <p key={i}>{parts}</p>
+      );
+    })}
+  </>
+);
+
+const Orb: React.FC<{ size?: number; busy?: boolean }> = ({ size = 32, busy }) => (
+  <span className="relative inline-flex shrink-0 items-center justify-center rounded-full" style={{ width: size, height: size }} aria-hidden="true">
+    <span className={`absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,#5EEAD4,#8B5CF6,#34D399,#5EEAD4)] ${busy ? 'animate-spin' : 'animate-[spin_8s_linear_infinite]'}`} />
+    <span className="absolute inset-[2px] rounded-full bg-night-900" />
+    <span className="absolute inset-[30%] rounded-full bg-gradient-to-br from-glow to-volt blur-[2px]" />
+  </span>
+);
 
 const AIAssistant: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const lang: Lang = i18n.language?.startsWith('en') ? 'en' : 'es';
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [inputValue, setInputValue] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const [showFloatingMessage, setShowFloatingMessage] = useState(true);
-  const [unreadCount, setUnreadCount] = useState(0);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const modalRef = useRef<HTMLDivElement>(null);
-  const firstFocusableRef = useRef<HTMLButtonElement>(null);
-  const lastFocusableRef = useRef<HTMLButtonElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const [messages, setMessages] = useState<ChatMsg[]>([]);
+  const [input, setInput] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [mode, setMode] = useState<Mode>('unknown');
+  const [showTip, setShowTip] = useState(false);
+  const lastIntents = useRef<string[]>([]);
+  const listRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const modeRef = useRef<Mode>('unknown');
+  const messagesRef = useRef<ChatMsg[]>([]);
+  messagesRef.current = messages;
 
   useEffect(() => {
-    scrollToBottom();
+    try {
+      if (sessionStorage.getItem('agent-tip')) return;
+    } catch {
+      /* storage unavailable */
+    }
+    const a = setTimeout(() => setShowTip(true), 3500);
+    const b = setTimeout(() => setShowTip(false), 11000);
+    return () => {
+      clearTimeout(a);
+      clearTimeout(b);
+    };
+  }, []);
+
+  useEffect(() => {
+    listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
   }, [messages]);
 
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
-      setUnreadCount(0);
-    }
+    if (isOpen) setTimeout(() => inputRef.current?.focus(), 80);
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && isOpen && setIsOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, [isOpen]);
 
-  // Handle Escape key to close modal
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
-        setIsOpen(false);
+  const patch = (id: string, p: Partial<ChatMsg>) => setMessages((prev) => prev.map((m) => (m.id === id ? { ...m, ...p } : m)));
+
+  /** Try Claude via /api/chat; returns false when the endpoint is not available. */
+  const streamRemote = async (id: string, history: ChatMsg[]) => {
+    if (modeRef.current === 'local') return false;
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          lang,
+          messages: history.filter((m) => m.text).map((m) => ({ role: m.role, content: m.text })),
+        }),
+      });
+      const type = res.headers.get('content-type') ?? '';
+      if (!res.ok || !res.body || !type.startsWith('text/plain')) throw new Error(String(res.status));
+      modeRef.current = 'remote';
+      setMode('remote');
+      const reader = res.body.getReader();
+      const dec = new TextDecoder();
+      let text = '';
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        text += dec.decode(value, { stream: true });
+        patch(id, { text, stepsDone: 99 });
       }
-    };
-
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [isOpen]);
-
-  // Focus trap for accessibility
-  const handleTabKey = useCallback((e: KeyboardEvent) => {
-    if (!isOpen || e.key !== 'Tab') return;
-
-    const focusableElements = modalRef.current?.querySelectorAll(
-      'button, input, [tabindex]:not([tabindex="-1"])'
-    );
-    
-    if (!focusableElements || focusableElements.length === 0) return;
-
-    const firstElement = focusableElements[0] as HTMLElement;
-    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
-
-    if (e.shiftKey && document.activeElement === firstElement) {
-      e.preventDefault();
-      lastElement.focus();
-    } else if (!e.shiftKey && document.activeElement === lastElement) {
-      e.preventDefault();
-      firstElement.focus();
+      return text.trim().length > 0;
+    } catch {
+      modeRef.current = 'local';
+      setMode('local');
+      return false;
     }
-  }, [isOpen]);
+  };
 
-  useEffect(() => {
-    document.addEventListener('keydown', handleTabKey);
-    return () => document.removeEventListener('keydown', handleTabKey);
-  }, [handleTabKey]);
+  const typeOut = async (id: string, full: string) => {
+    if (prefersReducedMotion()) return patch(id, { text: full });
+    const words = full.split(/(\s+)/);
+    let acc = '';
+    for (let i = 0; i < words.length; i++) {
+      acc += words[i];
+      if (i % 3 === 0 || i === words.length - 1) {
+        patch(id, { text: acc });
+        await sleep(22);
+      }
+    }
+  };
 
-  // Ocultar mensaje flotante después de 5 segundos
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowFloatingMessage(false);
-    }, 5000);
+  const send = useCallback(
+    async (raw: string) => {
+      const q = raw.trim();
+      if (!q || busy) return;
+      setBusy(true);
+      analytics.aiAssistantMessage('custom');
 
-    return () => clearTimeout(timer);
+      const userMsg: ChatMsg = { id: uid(), role: 'user', text: q };
+      const reply = runAgent(q, lang, lastIntents.current);
+      if (reply.intentIds.length) lastIntents.current = reply.intentIds;
+      const steps = planSteps(reply, lang);
+      const aid = uid();
+      const history = [...messagesRef.current, userMsg];
+      setMessages((prev) => [...prev, userMsg, { id: aid, role: 'assistant', text: '', steps, stepsDone: 0, streaming: true }]);
+
+      // Plan steps tick while the answer is prepared
+      for (let s = 1; s <= steps.length - 1; s++) {
+        await sleep(prefersReducedMotion() ? 0 : 380);
+        patch(aid, { stepsDone: s });
+      }
+
+      const remote = await streamRemote(aid, history);
+      if (!remote) await typeOut(aid, reply.text);
+      patch(aid, {
+        streaming: false,
+        stepsDone: steps.length,
+        sources: reply.sources,
+        followups: reply.followups,
+        actions: reply.actions,
+      });
+      setBusy(false);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [busy, lang]
+  );
+
+  const sendRef = useRef(send);
+  sendRef.current = send;
+
+  const open = useCallback(() => {
+    setIsOpen(true);
+    setShowTip(false);
+    try {
+      sessionStorage.setItem('agent-tip', '1');
+    } catch {
+      /* ignore */
+    }
+    analytics.aiAssistantOpen();
   }, []);
 
-  // Respuestas predefinidas basadas en el idioma
-  const getAIResponse = (userMessage: string): string => {
-    const message = userMessage.toLowerCase();
-
-    // Preguntas sobre experiencia
-    if (message.includes('experience') || message.includes('años') || message.includes('experiencia')) {
-      return t('aiAssistant.responses.experience');
-    }
-
-    // Preguntas sobre tecnologías
-    if (message.includes('tech') || message.includes('stack') || message.includes('tecnologías') || message.includes('tecnologias')) {
-      return t('aiAssistant.responses.tech');
-    }
-
-    // Preguntas sobre proyectos
-    if (message.includes('project') || message.includes('proyecto') || message.includes('work')) {
-      return t('aiAssistant.responses.projects');
-    }
-
-    // Preguntas sobre educación
-    if (message.includes('education') || message.includes('study') || message.includes('estudio') || message.includes('educación')) {
-      return t('aiAssistant.responses.education');
-    }
-
-    // Preguntas sobre ubicación
-    if (message.includes('where') || message.includes('location') || message.includes('dónde') || message.includes('ubicación')) {
-      return t('aiAssistant.responses.location');
-    }
-
-    // Preguntas sobre disponibilidad
-    if (message.includes('available') || message.includes('hire') || message.includes('contratar') || message.includes('disponible')) {
-      return t('aiAssistant.responses.availability');
-    }
-
-    // Preguntas sobre freelancing
-    if (message.includes('freelance') || message.includes('freelancer') || message.includes('independiente')) {
-      return t('aiAssistant.responses.freelance');
-    }
-
-    // Preguntas sobre contacto general
-    if (message.includes('contact') || message.includes('contacto') || message.includes('contactar')) {
-      return t('aiAssistant.responses.contact');
-    }
-
-    // Preguntas sobre WhatsApp específicamente (debe ir antes de IA para evitar conflicto)
-    if (message.includes('whatsapp') || message.includes('whats app') || message.includes('wa')) {
-      return t('aiAssistant.responses.whatsapp');
-    }
-
-    // Preguntas sobre email
-    if (message.includes('email') || message.includes('correo') || message.includes('mail')) {
-      return t('aiAssistant.responses.email');
-    }
-
-    // Preguntas sobre teléfono
-    if (message.includes('phone') || message.includes('teléfono') || message.includes('telefono') || message.includes('celular')) {
-      return t('aiAssistant.responses.phone');
-    }
-
-    // Preguntas sobre CV
-    if (message.includes('cv') || message.includes('resume') || message.includes('curriculum') || message.includes('currículum')) {
-      return t('aiAssistant.responses.cv');
-    }
-
-    // Preguntas sobre descarga
-    if (message.includes('download') || message.includes('descargar') || message.includes('descarga')) {
-      return t('aiAssistant.responses.download');
-    }
-
-    // Preguntas sobre IA (debe ir después de WhatsApp para evitar conflicto)
-    if ((message.includes('ai') && !message.includes('email') && !message.includes('whatsapp')) || message.includes('machine learning') || message.includes('inteligencia artificial')) {
-      return t('aiAssistant.responses.ai');
-    }
-
-    // Respuesta por defecto
-    return t('aiAssistant.responses.default');
-  };
-
-  // Format timestamp
-  const formatTime = (date: Date): string => {
-    return date.toLocaleTimeString(i18n.language === 'es' ? 'es-ES' : 'en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
-
-  // Handle quick suggestion click
-  const handleQuickSuggestion = (key: string) => {
-    const suggestionText = t(`aiAssistant.suggestions.${key}`);
-    setInputValue(suggestionText);
-    // Auto-send after a brief delay
-    setTimeout(() => {
-      const userMessage: Message = {
-        id: Date.now().toString(),
-        text: suggestionText,
-        isUser: true,
-        timestamp: new Date(),
-      };
-      setMessages(prev => [...prev, userMessage]);
-      setIsTyping(true);
-      analytics.aiAssistantMessage(key);
-
-      setTimeout(() => {
-        const responseText = getAIResponse(suggestionText);
-        const showWhatsAppButton = responseText.toLowerCase().includes('whatsapp');
-        
-        const aiResponse: Message = {
-          id: (Date.now() + 1).toString(),
-          text: responseText,
-          isUser: false,
-          timestamp: new Date(),
-          showWhatsAppButton,
-        };
-        setMessages(prev => [...prev, aiResponse]);
-        setIsTyping(false);
-      }, 1000);
-    }, 100);
-    setInputValue('');
-  };
-
-  // Clear chat history
-  const clearChat = () => {
-    const welcomeMessage: Message = {
-      id: 'welcome',
-      text: t('aiAssistant.welcomeMessage'),
-      isUser: false,
-      timestamp: new Date(),
+  // Hero prompt / command palette hand questions over through this event
+  useEffect(() => {
+    const onAsk = (e: Event) => {
+      open();
+      const q = (e as CustomEvent<string>).detail;
+      if (q) setTimeout(() => sendRef.current(q), 250);
     };
-    setMessages([welcomeMessage]);
-  };
+    window.addEventListener('ai:ask', onAsk);
+    return () => window.removeEventListener('ai:ask', onAsk);
+  }, [open]);
 
-  const handleSendMessage = async () => {
-    if (!inputValue.trim()) return;
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      text: inputValue,
-      isUser: true,
-      timestamp: new Date(),
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setInputValue('');
-    setIsTyping(true);
-
-    analytics.aiAssistantMessage('custom');
-
-    // Simular delay de escritura
-    setTimeout(() => {
-      const responseText = getAIResponse(inputValue);
-      const showWhatsAppButton = responseText.toLowerCase().includes('whatsapp');
-      
-      const aiResponse: Message = {
-        id: (Date.now() + 1).toString(),
-        text: responseText,
-        isUser: false,
-        timestamp: new Date(),
-        showWhatsAppButton,
-      };
-
-      setMessages(prev => [...prev, aiResponse]);
-      setIsTyping(false);
-      
-      // Increment unread if chat is closed
-      if (!isOpen) {
-        setUnreadCount(prev => prev + 1);
-      }
-    }, 1000);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
+  const runAction = (a: KAction) => {
+    if (a.kind === 'scroll') {
+      scrollToSection(a.target);
+      if (window.innerWidth < 640) setIsOpen(false);
+    } else if (a.kind === 'link') {
+      window.open(lang === 'es' ? '/cv-es.pdf' : '/cv-en.pdf', '_blank', 'noopener');
+    } else if (a.kind === 'whatsapp') {
+      const msg = lang === 'es' ? 'Hola Brandon, vi tu portafolio y me gustaría hablar contigo.' : "Hi Brandon, I saw your portfolio and I'd like to talk.";
+      window.open(`https://wa.me/${a.target.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    } else if (a.kind === 'email') {
+      window.location.href = `mailto:${a.target}`;
     }
   };
 
-  const toggleChat = () => {
-    const newIsOpen = !isOpen;
-    setIsOpen(newIsOpen);
-    
-    if (newIsOpen) {
-      analytics.aiAssistantOpen();
-      setUnreadCount(0);
-      
-      if (messages.length === 0) {
-        // Mensaje de bienvenida
-        const welcomeMessage: Message = {
-          id: 'welcome',
-          text: t('aiAssistant.welcomeMessage'),
-          isUser: false,
-          timestamp: new Date(),
-        };
-        setMessages([welcomeMessage]);
-      }
-    }
-  };
+  const actionIcon = (k: KAction['kind']) =>
+    k === 'link' ? <FileDown size={13} /> : k === 'whatsapp' ? <MessageCircle size={13} /> : k === 'email' ? <Mail size={13} /> : <ArrowRight size={13} />;
+
+  const startChips = START_CHIPS.map((id) => INTENTS.find((i) => i.id === id)!).filter(Boolean);
+  const status =
+    mode === 'remote' ? t('aiAssistant.statusRemote') : mode === 'local' ? t('aiAssistant.statusLocal') : t('aiAssistant.statusReady');
 
   return (
     <>
-      {/* Botón flotante con mensaje */}
-      <div className="fixed bottom-6 right-6 z-50 flex items-center space-x-3">
-        {/* Mensaje flotante */}
-        {!isOpen && showFloatingMessage && (
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
-            className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white px-4 py-2 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700"
-          >
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium">
-                {t('aiAssistant.floatingMessage')}
-              </span>
-            </div>
-            {/* Flecha apuntando al botón */}
-            <div className="absolute right-0 top-1/2 transform translate-x-full -translate-y-1/2">
-              <div className="w-0 h-0 border-l-8 border-l-white dark:border-l-gray-800 border-t-4 border-t-transparent border-b-4 border-b-transparent"></div>
-            </div>
-          </motion.div>
-        )}
-
-        {/* Botón */}
+      {/* Launcher */}
+      <div className="fixed bottom-5 right-5 z-[60] flex items-center gap-3">
+        <AnimatePresence>
+          {!isOpen && showTip && (
+            <motion.button
+              onClick={open}
+              initial={{ opacity: 0, x: 12 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 12 }}
+              className="hidden rounded-full border border-white/10 bg-night-800/90 px-4 py-2 text-sm text-white shadow-lg backdrop-blur-xl sm:block"
+            >
+              {t('aiAssistant.launcherTip')}
+            </motion.button>
+          )}
+        </AnimatePresence>
         <motion.button
-          onClick={toggleChat}
-          className={`relative text-white p-6 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
-            isOpen ? 'bg-green-600 hover:bg-green-700' : 'bg-blue-600 hover:bg-blue-700'
-          }`}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          onClick={() => (isOpen ? setIsOpen(false) : open())}
+          whileHover={{ scale: 1.06 }}
+          whileTap={{ scale: 0.94 }}
+          className="group relative flex h-14 w-14 items-center justify-center rounded-full shadow-[0_10px_40px_-8px_rgba(94,234,212,.6)]"
           aria-label={isOpen ? t('aiAssistant.close') : t('aiAssistant.open')}
           aria-expanded={isOpen}
-          aria-haspopup="dialog"
+          aria-controls="agent-panel"
         >
-          {isOpen ? <X size={32} /> : <Bot size={32} />}
-          {!isOpen && unreadCount > 0 && (
-            <motion.div
-              className="absolute -top-1 -right-1 min-w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-            >
-              {unreadCount}
-            </motion.div>
-          )}
-          {!isOpen && unreadCount === 0 && (
-            <motion.div
-              className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
+          {isOpen ? (
+            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-night-800 text-white">
+              <X size={22} />
+            </span>
+          ) : (
+            <Orb size={56} busy={busy} />
           )}
         </motion.button>
       </div>
 
-      {/* Chat modal */}
+      {/* Panel */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            ref={modalRef}
+          <motion.section
+            id="agent-panel"
             role="dialog"
-            aria-modal="true"
-            aria-labelledby="chat-title"
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            className="fixed bottom-24 right-6 z-50 w-[calc(100vw-3rem)] sm:w-96 h-[70vh] sm:h-[500px] max-h-[600px] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col overflow-hidden"
+            aria-labelledby="agent-title"
+            initial={{ opacity: 0, y: 16, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 16, scale: 0.98 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-x-3 bottom-24 z-[60] flex h-[min(640px,calc(100dvh-8rem))] flex-col overflow-hidden rounded-3xl border border-white/10 bg-night-900/95 shadow-[0_40px_120px_-20px_rgba(0,0,0,.9),0_0_0_1px_rgba(94,234,212,.06)] backdrop-blur-2xl sm:inset-x-auto sm:right-5 sm:w-[420px]"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-600 to-purple-600">
-              <div className="flex items-center space-x-2">
-                <Bot className="text-white" size={20} />
-                <span id="chat-title" className="font-semibold text-white">
-                  {t('aiAssistant.title')}
-                </span>
-                <span className="text-xs text-blue-200 bg-blue-500/30 px-2 py-0.5 rounded-full">
-                  AI
-                </span>
+            <header className="flex items-center gap-3 border-b border-white/[0.07] px-4 py-3">
+              <Orb size={34} busy={busy} />
+              <div className="min-w-0 flex-1">
+                <h2 id="agent-title" className="font-display text-base font-semibold leading-tight text-white">
+                  {t('aiAssistant.agentName')}
+                </h2>
+                <p className="flex items-center gap-1.5 text-xs text-text-muted">
+                  <span className={`h-1.5 w-1.5 rounded-full ${mode === 'local' ? 'bg-volt' : 'bg-leaf'}`} />
+                  {status}
+                </p>
               </div>
-              <div className="flex items-center space-x-2">
+              {messages.length > 0 && (
                 <button
-                  onClick={clearChat}
-                  className="text-white/70 hover:text-white p-1 rounded transition-colors"
+                  onClick={() => {
+                    setMessages([]);
+                    lastIntents.current = [];
+                  }}
+                  className="rounded-full p-2 text-text-muted transition-colors hover:bg-white/5 hover:text-white"
                   aria-label={t('aiAssistant.clearChat')}
                   title={t('aiAssistant.clearChat')}
                 >
-                  <Trash2 size={18} />
+                  <RotateCcw size={16} />
                 </button>
-                <button
-                  ref={firstFocusableRef}
-                  onClick={toggleChat}
-                  className="text-white/70 hover:text-white p-1 rounded transition-colors"
-                  aria-label={t('aiAssistant.close')}
-                >
-                  <X size={20} />
-                </button>
-              </div>
-            </div>
-
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4" role="log" aria-live="polite">
-              {messages.map((message) => (
-                <motion.div
-                  key={message.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
-                >
-                  <div
-                    className={`max-w-[85%] px-4 py-3 rounded-2xl ${
-                      message.isUser
-                        ? 'bg-blue-600 text-white rounded-br-md'
-                        : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-bl-md'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-4 mb-1">
-                      <div className="flex items-center space-x-2">
-                        {message.isUser ? (
-                          <User size={14} className="text-blue-200" />
-                        ) : (
-                          <Bot size={14} className="text-blue-500 dark:text-blue-400" />
-                        )}
-                        <span className="text-xs font-medium opacity-80">
-                          {message.isUser 
-                            ? t('aiAssistant.you')
-                            : t('aiAssistant.assistant')
-                          }
-                        </span>
-                      </div>
-                      <span className="text-xs opacity-50">
-                        {formatTime(message.timestamp)}
-                      </span>
-                    </div>
-                    <p className="text-sm whitespace-pre-line leading-relaxed">{message.text}</p>
-                    {message.showWhatsAppButton && (
-                      <div className="mt-3">
-                        <a
-                          href={`https://wa.me/${CONTACT_INFO.WHATSAPP}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
-                          aria-label={t('aiAssistant.openWhatsApp')}
-                        >
-                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-                          </svg>
-                          WhatsApp
-                        </a>
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-              
-              {isTyping && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex justify-start"
-                >
-                  <div className="bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 px-4 py-2 rounded-lg">
-                    <div className="flex items-center space-x-2">
-                      <Bot size={14} className="text-gray-500" />
-                      <span className="text-xs opacity-70">
-                        {t('aiAssistant.assistant')}
-                      </span>
-                    </div>
-                    <div className="flex space-x-1 mt-1">
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                    </div>
-                  </div>
-                </motion.div>
               )}
-              
-              <div ref={messagesEndRef} />
+              <button onClick={() => setIsOpen(false)} className="rounded-full p-2 text-text-muted transition-colors hover:bg-white/5 hover:text-white" aria-label={t('aiAssistant.close')}>
+                <X size={18} />
+              </button>
+            </header>
+
+            {/* Conversation */}
+            <div ref={listRef} className="flex-1 space-y-5 overflow-y-auto px-4 py-5" aria-live="polite">
+              {messages.length === 0 && (
+                <div className="flex h-full flex-col justify-end">
+                  <p className="font-display text-2xl font-semibold leading-tight text-white">{t('aiAssistant.emptyTitle')}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-text-muted">{t('aiAssistant.emptyBody')}</p>
+                  <div className="mt-5 grid grid-cols-2 gap-2">
+                    {startChips.map((i) => (
+                      <button
+                        key={i.id}
+                        onClick={() => send(i.ask[lang])}
+                        className="rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2.5 text-left text-sm text-white/85 transition-colors hover:border-glow/40 hover:bg-white/[0.06]"
+                      >
+                        {i.ask[lang]}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {messages.map((m) =>
+                m.role === 'user' ? (
+                  <div key={m.id} className="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-white/[0.09] px-4 py-2.5 text-[15px] text-white">
+                    {m.text}
+                  </div>
+                ) : (
+                  <div key={m.id} className="flex gap-3">
+                    <Orb size={24} busy={m.streaming} />
+                    <div className="min-w-0 flex-1">
+                      {m.steps && (m.streaming || !m.text) && (
+                        <ol className="mb-2 space-y-1">
+                          {m.steps.map((s, i) => {
+                            const done = (m.stepsDone ?? 0) > i;
+                            const active = (m.stepsDone ?? 0) === i;
+                            if (!done && !active) return null;
+                            return (
+                              <li key={i} className="flex items-center gap-2 text-xs text-text-muted">
+                                {done ? <Check size={12} className="text-leaf" /> : <span className="h-3 w-3 animate-spin rounded-full border border-glow border-t-transparent" />}
+                                <span className={active ? 'text-white/80' : ''}>{s}</span>
+                              </li>
+                            );
+                          })}
+                        </ol>
+                      )}
+                      {m.text && (
+                        <div className="space-y-1 text-[15px] leading-relaxed text-white/85">
+                          <RichText text={m.text} />
+                          {m.streaming && <span className="ml-0.5 inline-block h-4 w-[2px] translate-y-0.5 animate-caret bg-glow" />}
+                        </div>
+                      )}
+                      {!m.streaming && !!m.sources?.length && (
+                        <p className="mt-3 flex flex-wrap items-center gap-1.5 text-[11px] text-text-muted">
+                          {t('aiAssistant.sourcesLabel')}
+                          {m.sources.map((s) => (
+                            <span key={s} className="rounded-md border border-white/[0.08] px-1.5 py-0.5 text-white/60">
+                              {s}
+                            </span>
+                          ))}
+                        </p>
+                      )}
+                      {!m.streaming && !!m.actions?.length && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {m.actions.map((a) => (
+                            <button
+                              key={a.kind + a.target}
+                              onClick={() => runAction(a)}
+                              className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-medium text-night-950 transition hover:brightness-90"
+                            >
+                              {actionIcon(a.kind)}
+                              {a.label[lang]}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                      {!m.streaming && !!m.followups?.length && m.id === messages[messages.length - 1]?.id && (
+                        <div className="mt-3 flex flex-col items-start gap-1.5">
+                          {m.followups.map((f) => (
+                            <button
+                              key={f.ask}
+                              onClick={() => send(f.ask)}
+                              className="inline-flex items-center gap-1.5 rounded-lg px-2 py-1 text-left text-sm text-glow/90 transition-colors hover:bg-glow/10 hover:text-glow"
+                            >
+                              <CornerDownRight size={13} aria-hidden="true" />
+                              {f.ask}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )
+              )}
             </div>
 
-            {/* Quick Suggestions */}
-            {messages.length <= 1 && (
-              <div className="px-4 pb-2">
-                <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-1">
-                  <MessageSquare size={12} />
-                  {t('aiAssistant.quickSuggestions')}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {QUICK_SUGGESTIONS.map((suggestion) => (
-                    <button
-                      key={suggestion.key}
-                      onClick={() => handleQuickSuggestion(suggestion.key)}
-                      className="text-xs px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex items-center gap-1"
-                    >
-                      <span>{suggestion.icon}</span>
-                      <span>{t(`aiAssistant.suggestionLabels.${suggestion.key}`)}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Input */}
-            <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-              <div className="flex space-x-2">
-                <input
+            {/* Composer */}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const q = input;
+                setInput('');
+                send(q);
+              }}
+              className="border-t border-white/[0.07] p-3"
+            >
+              <div className="flex items-end gap-2 rounded-2xl border border-white/10 bg-night-800/80 p-1.5 pl-3 focus-within:border-glow/40">
+                <Sparkles size={16} className="mb-2.5 shrink-0 text-glow" aria-hidden="true" />
+                <label htmlFor="agent-input" className="sr-only">
+                  {t('aiAssistant.placeholder')}
+                </label>
+                <textarea
+                  id="agent-input"
                   ref={inputRef}
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyDown={handleKeyDown}
+                  rows={1}
+                  value={input}
+                  maxLength={600}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      const q = input;
+                      setInput('');
+                      send(q);
+                    }
+                  }}
                   placeholder={t('aiAssistant.placeholder')}
-                  className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white text-sm"
-                  aria-label={t('aiAssistant.placeholder')}
+                  className="max-h-28 min-h-[36px] flex-1 resize-none border-0 bg-transparent px-0 py-2 text-[15px] text-white placeholder:text-text-muted focus:ring-0"
                 />
                 <button
-                  ref={lastFocusableRef}
-                  onClick={handleSendMessage}
-                  disabled={!inputValue.trim() || isTyping}
-                  className="px-4 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  type="submit"
+                  disabled={!input.trim() || busy}
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-night-950 transition disabled:opacity-30"
                   aria-label={t('aiAssistant.send')}
                 >
-                  <Send size={18} />
+                  <ArrowUp size={17} />
                 </button>
               </div>
-            </div>
-          </motion.div>
+              <p className="mt-2 px-1 text-[11px] text-text-muted">{t('aiAssistant.disclaimer')}</p>
+            </form>
+          </motion.section>
         )}
       </AnimatePresence>
     </>
   );
 };
 
-export default AIAssistant; 
+export default AIAssistant;

@@ -4,7 +4,7 @@ export const CONTACT_INFO = {
   WHATSAPP: '+573006361659',
   LINKEDIN: 'https://www.linkedin.com/in/brandon-landaetta-70340ba2/',
   GITHUB: 'https://github.com/landaettadev',
-  WEBSITE: 'https://brandonlandaetta.dev',
+  WEBSITE: 'https://landaetta.dev',
 } as const;
 
 export const SOCIAL_LINKS = {

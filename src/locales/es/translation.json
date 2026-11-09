@@ -5,20 +5,36 @@
     "stack": "Tecnologías",
     "projects": "Proyectos",
     "contact": "Contacto",
-    "downloadCV": "Descargar CV"
+    "downloadCV": "Descargar CV",
+    "ai": "IA y Cloud",
+    "search": "Buscar o preguntar",
+    "menu": "Abrir menú"
   },
   "hero": {
     "name": "Brandon",
     "lastName": "Landaetta",
-    "title": "Senior Software Engineer · Full-Stack & AI",
-    "description": "Construyendo soluciones empresariales escalables con .NET, Angular y React, e integrando IA sobre Azure y Google Cloud para transformar negocios.",
+    "title": "Construyo software empresarial con IA generativa, en Azure y Google Cloud.",
+    "description": "Experiencia en desarrollo web full-stack con .NET, Angular y React: aplicaciones web, portales y APIs empresariales, arquitecturas sobre Azure y Google Cloud y soluciones de IA en producción.",
     "downloadCV": "Descargar CV",
-    "viewProjects": "Ver Proyectos",
-    "scrollDown": "Desplázate hacia abajo"
+    "viewProjects": "Ver proyectos",
+    "scrollDown": "Desplázate hacia abajo",
+    "available": "Disponible para nuevos retos",
+    "askLabel": "Pregúntale a mi agente",
+    "askButton": "Preguntar",
+    "questions": [
+      "¿Qué agentes de IA has construido?",
+      "¿Cómo funcionaba tu agente de certificados?",
+      "¿Con qué servicios de Azure trabajas?",
+      "¿Estás disponible para contratar?"
+    ],
+    "clouds": "En producción sobre",
+    "role": "Ingeniero de Software Senior",
+    "tagline": "Construyo aplicaciones web, plataformas cloud y agentes de IA.",
+    "askHint": "O pregúntale a mi agente sobre mi experiencia:"
   },
   "about": {
     "title": "Acerca de Mí",
-    "description1": "Soy ingeniero de software con más de 9 años de experiencia construyendo soluciones empresariales full-stack e integrando IA en producción. Me especializo en arquitecturas escalables con .NET, Angular y React, sobre Azure y Google Cloud Platform.",
+    "description1": "Soy ingeniero de software con experiencia construyendo soluciones empresariales full-stack e integrando IA en producción. Me especializo en arquitecturas escalables con .NET, Angular y React, sobre Azure y Google Cloud Platform.",
     "description2": "Mi enfoque combina excelencia técnica con empatía hacia el usuario, asegurando que las soluciones no solo sean técnicamente sólidas sino también intuitivas y accesibles para todos los usuarios.",
     "description3": "Estoy constantemente aprendiendo y explorando nuevas tecnologías, con un enfoque en optimización de rendimiento, arquitectura de componentes y sistemas de diseño.",
     "yearsExperience": "Años de Experiencia",
@@ -36,7 +52,7 @@
       "trainee": "Aprendiz de Técnico en TI"
     },
     "descriptions": {
-      "haceb": "Ingeniero de Software en Industrias Haceb S.A., enfocado en el diseño, desarrollo e implementación de soluciones tecnológicas escalables para entornos corporativos. Desarrollo full-stack con .NET, Java, Angular y SQL Server, junto a servicios en la nube sobre Azure y Google Cloud Platform (GCP). Participación en análisis de requerimientos, construcción de APIs, integración entre sistemas, optimización de procesos internos y desarrollo de aplicaciones orientadas a negocio, aplicando buenas prácticas de rendimiento, seguridad y mantenibilidad bajo metodologías ágiles.",
+      "haceb": "Ingeniero de Software en Industrias Haceb S.A., enfocado en el diseño, desarrollo e implementación de soluciones tecnológicas escalables para entornos corporativos. Desarrollo full-stack con .NET, Angular y SQL Server, junto a servicios en la nube sobre Azure y Google Cloud Platform (GCP). Participación en análisis de requerimientos, construcción de APIs, integración entre sistemas, optimización de procesos internos y desarrollo de aplicaciones orientadas a negocio, aplicando buenas prácticas de rendimiento, seguridad y mantenibilidad bajo metodologías ágiles.",
       "eafit": "Desarrollo de agentes conversacionales con Microsoft Copilot Studio para atención automatizada a estudiantes, diseñando 4 flujos conversacionales con lógica de negocio y prompts optimizados. Desarrollo full-stack de portal web con Angular 20 (zoneless, Signals), TypeScript, RxJS y .NET Core. Integración de múltiples servicios de IA: Azure AI Foundry, OpenAI y Copilot Studio con BotFramework-WebChat. Implementación de telemetría empresarial con Azure Application Insights, cumpliendo GDPR, sistema de estados de chat con persistencia en localStorage, y autenticación corporativa con MSAL. Configuración de infraestructura en Azure (App Services, Application Insights, Bot Services).",
       "intern": "Diseñé y mantuve aplicaciones web y de escritorio en C# y ASP .NET, mejorando la funcionalidad y los procesos de soporte. Realicé ajustes de rendimiento y optimización de bases de datos para Microsoft SQL Server, reduciendo los tiempos de consulta hasta en un 30%. Proporcioné soporte técnico y capacitación a usuarios finales, asegurando una adopción fluida de las soluciones de software.",
       "fullstack": "Participé en el desarrollo e implementación de módulos internos para sistemas de gestión de inventario y control de iluminación, utilizando ASP.NET Core, C# y SQL Server. Construí interfaces web dinámicas con Angular y TypeScript, enfocándome en optimizar la experiencia del usuario. Integré servicios REST y autenticación JWT para garantizar la seguridad en los procesos de acceso a la plataforma. Colaboré en la migración de sistemas legacy a arquitecturas más escalables, aplicando principios SOLID y mejores prácticas de Clean Architecture.",
@@ -77,8 +93,8 @@
         "description": "Sistema personalizado para la creación de informes automáticos, integrado con IA generativa usando APIs y servicios de Google Cloud en Python y SQL (Cloud Run, Gemini, Storage, BigQuery)."
       },
       "digitalGames": {
-        "title": "Tienda de Juegos Digitales - DigitalDeluxes",
-        "description": "Sitio web de venta de videojuegos digitales desarrollado en PHP puro y MySQL, con consumo de API de Kinguin e integración de múltiples pasarelas de pago (Coinpal, Payeer, Wompi, MercadoPago)."
+        "title": "Marketplace de Claves Digitales - PopularKeys",
+        "description": "Marketplace moderno de claves digitales construido con Next.js y NestJS, integrado con el catálogo de Kinguin, PostgreSQL, Redis, MeiliSearch y pagos con Wompi y CoinPal."
       },
       "smmPlatform": {
         "title": "Plataforma de Servicios SMM - 1popularity",
@@ -102,9 +118,12 @@
       "subjectPlaceholder": "Consulta de Proyecto",
       "messagePlaceholder": "Cuéntame sobre tu proyecto...",
       "sendButton": "Enviar Mensaje",
-      "sending": "Enviando...",
-      "success": "¡Tu mensaje ha sido enviado exitosamente!",
-      "error": "Algo salió mal. Por favor intenta de nuevo más tarde."
+      "sending": "Enviando…",
+      "success": "Mensaje enviado. Te responderé lo antes posible.",
+      "error": "No se pudo enviar el mensaje. Inténtalo de nuevo o escríbeme a brandon@landaetta.dev.",
+      "required": "Este campo es obligatorio.",
+      "invalidEmail": "Escribe un email válido, por ejemplo nombre@empresa.com.",
+      "tooShort": "Cuéntame un poco más (mínimo 10 caracteres)."
     }
   },
   "footer": {
@@ -118,13 +137,13 @@
     "welcome": "¡Hola! Soy el asistente de Brandon. ¿En qué puedo ayudarte hoy?",
     "welcomeMessage": "👋 ¡Hola! Soy el asistente IA de Brandon. ¡Pregúntame sobre su experiencia, proyectos o habilidades!",
     "floatingMessage": "¡Soy el Asistente IA de Brandon! ¡Pregúntame! 🤖",
-    "placeholder": "Escribe tu pregunta...",
+    "placeholder": "Escribe tu pregunta…",
     "you": "Tú",
     "assistant": "Asistente",
-    "open": "Abrir Asistente IA",
-    "close": "Cerrar chat",
-    "send": "Enviar mensaje",
-    "clearChat": "Limpiar chat",
+    "open": "Abrir agente",
+    "close": "Cerrar agente",
+    "send": "Enviar",
+    "clearChat": "Nueva conversación",
     "openWhatsApp": "Abrir chat de WhatsApp",
     "quickSuggestions": "Preguntas rápidas:",
     "suggestions": {
@@ -144,14 +163,14 @@
       "availability": "Disponibilidad"
     },
     "responses": {
-      "experience": "Tengo más de 9 años de experiencia en desarrollo de software. Actualmente trabajo como Ingeniero de Software en Industrias Haceb, y previamente en EAFIT desarrollé agentes conversacionales con Microsoft Copilot Studio y Azure AI. He construido soluciones empresariales full-stack con .NET, Java, Angular y React, además de plataformas web y sistemas de IA.",
-      "tech": "Mi stack incluye .NET (C#, ASP.NET Core), Java, Angular (Signals, Zoneless), React, TypeScript, RxJS, Python y PHP. En la nube trabajo con Azure (App Services, AI Foundry, Application Insights, Bot Services) y Google Cloud (Cloud Run, BigQuery, Gemini). Bases de datos: SQL Server, PostgreSQL, MySQL. Además: Microsoft Copilot Studio, MSAL, Docker, GitHub Actions y Azure DevOps.",
+      "experience": "Tengo experiencia en desarrollo de software. Actualmente trabajo como Ingeniero de Software en Industrias Haceb, y previamente en EAFIT desarrollé agentes conversacionales con Microsoft Copilot Studio y Azure AI. He construido soluciones empresariales full-stack con .NET, Angular y React, además de plataformas web y sistemas de IA.",
+      "tech": "Mi stack incluye .NET (C#, ASP.NET Core), Angular (Signals, Zoneless), React, TypeScript, RxJS, Python y PHP. En la nube trabajo con Azure (App Services, AI Foundry, Application Insights, Bot Services) y Google Cloud (Cloud Run, BigQuery, Gemini). Bases de datos: SQL Server, PostgreSQL, MySQL. Además: Microsoft Copilot Studio, MSAL, Docker, GitHub Actions y Azure DevOps.",
       "projects": "He desarrollado varios proyectos destacados: un sistema de cajero Bitcoin, una plataforma de recomendaciones IA para retail, sistemas de reportes automatizados con IA, y plataformas de e-commerce.",
       "education": "Soy Ingeniero de Software con formación en desarrollo web, bases de datos, y tecnologías modernas. Me mantengo actualizado constantemente aprendiendo nuevas tecnologías.",
       "location": "Actualmente trabajo de forma remota y estoy disponible para proyectos en cualquier parte del mundo. Tengo experiencia trabajando con equipos internacionales.",
       "availability": "¡Sí! Estoy disponible para nuevos proyectos y oportunidades. Puedes contactarme a través del formulario de contacto o directamente por email. Me encantaría escuchar sobre tu proyecto.",
       "freelance": "Sí, trabajo como desarrollador freelance y he entregado múltiples proyectos exitosos. Tengo experiencia en e-commerce, aplicaciones web, y sistemas empresariales.",
-      "ai": "Tengo experiencia construyendo soluciones de IA en producción: agentes conversacionales con Microsoft Copilot Studio integrados con BotFramework-WebChat, sistemas de recomendaciones, reportes automatizados con Gemini, y análisis de datos. He trabajado con Azure AI Foundry, OpenAI, Google Cloud (Cloud Run, BigQuery) y telemetría empresarial con Application Insights cumpliendo GDPR.",
+      "ai": "Construí en Copilot Studio un agente para Microsoft Teams que asesora a estudiantes de EAFIT sobre certificados: informa el estado del trámite, entrega el código de descarga cuando está disponible y valida si el estudiante aparece en las listas de Sapiencia. También he creado reportes automatizados con Gemini y BigQuery, sistemas de recomendación con ML y telemetría con Application Insights cumpliendo GDPR.",
       "contact": "Puedes contactar a Brandon a través de:\n\n📧 Email: brandon@landaetta.dev\n📱 Teléfono: +57 300 636 1659\n\nEstá disponible para proyectos y colaboraciones. ¡No dudes en contactarlo!",
       "email": "📧 Email de Brandon: brandon@landaetta.dev\n\nResponde rápidamente a consultas profesionales y propuestas de proyectos.",
       "phone": "📱 Teléfono de Brandon: +57 300 636 1659\n\nPuedes llamar o enviar un mensaje de WhatsApp. Está disponible en horario laboral.",
@@ -159,6 +178,160 @@
       "cv": "📄 Puedes descargar el CV de Brandon de dos formas:\n\n1. Haz clic en el botón 'Descargar CV' en el header\n2. Enlace directo: https://landaetta.dev/cv-es.pdf\n\nSu CV incluye toda su experiencia, proyectos y habilidades.",
       "download": "📥 Para descargar el CV de Brandon:\n\n• Haz clic en el botón 'Descargar CV' en la navegación\n• O visita: https://landaetta.dev/cv-es.pdf\n\nSu CV está actualizado con sus últimos proyectos y habilidades.",
       "default": "¡Hola! Soy el asistente de Brandon. Puedo responder preguntas sobre su experiencia, proyectos, tecnologías y disponibilidad. ¿En qué puedo ayudarte?"
+    },
+    "agentName": "Agente de Brandon",
+    "statusRemote": "Claude · en línea",
+    "statusLocal": "Motor local · base de conocimiento",
+    "statusReady": "Listo para responder",
+    "sourcesLabel": "Fuentes:",
+    "launcherTip": "Agente IA · Pregúntame",
+    "emptyTitle": "Pregunta lo que quieras sobre Brandon.",
+    "emptyBody": "Respondo con base en su experiencia real: agentes de IA, cloud, proyectos y disponibilidad.",
+    "disclaimer": "Respuestas basadas en el perfil de Brandon. Para algo puntual, escríbele directo."
+  },
+  "ai": {
+    "title": "Así trabaja un agente que construí",
+    "lede": "En EAFIT construí con Copilot Studio un agente para Microsoft Teams que asesora a los estudiantes sobre certificados: consulta el estado del trámite, entrega el código de descarga cuando está listo y valida si aparecen en las listas de Sapiencia. Todo medido con Application Insights.",
+    "replay": "Repetir recorrido",
+    "question": "Hola, ¿en qué va mi certificado de notas?",
+    "answer": "Tu trámite está aprobado: descárgalo con el código CERT-8F3K-2Q. También confirmé que estás en la lista vigente de Sapiencia.",
+    "nodes": {
+      "user": {
+        "title": "Estudiante",
+        "detail": "Chat en Microsoft Teams"
+      },
+      "agent": {
+        "title": "Agente",
+        "detail": "Copilot Studio, tema \"estado de certificado\""
+      },
+      "llm": {
+        "title": "Respuesta",
+        "detail": "Respuestas generativas con Azure OpenAI"
+      },
+      "obs": {
+        "title": "Telemetría",
+        "detail": "Application Insights, conforme a GDPR"
+      },
+      "tramite": {
+        "title": "Estado del trámite",
+        "detail": "API .NET: estado y código de descarga"
+      },
+      "sapiencia": {
+        "title": "Listas Sapiencia",
+        "detail": "Valida si el estudiante es beneficiario"
+      }
+    },
+    "cards": {
+      "agents": {
+        "title": "Agentes conversacionales",
+        "body": "Un agente en Teams que asesora sobre certificados: informa el estado del trámite, entrega el código de descarga y valida las listas de Sapiencia. Flujos con lógica de negocio y prompts afinados."
+      },
+      "genai": {
+        "title": "IA generativa sobre datos",
+        "body": "Reportes que se escriben solos: Gemini lee BigQuery desde Cloud Run y entrega informes listos para negocio."
+      },
+      "cloud": {
+        "title": "Nube de punta a punta",
+        "body": "App Services, Bot Services y AI Foundry en Azure; Cloud Run, BigQuery y Storage en GCP. CI/CD con GitHub Actions y Azure DevOps."
+      },
+      "fullstack": {
+        "title": "Aplicaciones web full-stack",
+        "body": "Aplicaciones y portales web con Angular (Signals) y React sobre APIs .NET seguras: integración entre sistemas, autenticación corporativa y SQL Server afinado."
+      },
+      "ml": {
+        "title": "Recomendaciones con ML",
+        "body": "Módulo \"Solo para ti\" en retail: modelos en Python sobre Teradata servidos a una app React."
+      }
+    },
+    "simulated": "Recorrido simulado con datos de ejemplo",
+    "tryAgent": "Probar el agente",
+    "capabilitiesTitle": "Qué construyo",
+    "flowLabel": "Flujo del agente"
+  },
+  "stats": {
+    "years": "años en producción",
+    "agents": "flujos de agente desplegados",
+    "clouds": "nubes: Azure y GCP",
+    "query": "menos tiempo en consultas SQL"
+  },
+  "palette": {
+    "placeholder": "Escribe un comando o una pregunta…",
+    "navigate": "Ir a",
+    "actions": "Acciones",
+    "ask": "Preguntar al agente",
+    "downloadCV": "Descargar CV",
+    "copyEmail": "Copiar email",
+    "copied": "Email copiado",
+    "switchLang": "Switch to English",
+    "github": "Abrir GitHub",
+    "linkedin": "Abrir LinkedIn",
+    "empty": "Sin coincidencias. Pulsa Enter para preguntarle al agente."
+  },
+  "stackExtra": {
+    "lede": "Las herramientas con las que he entregado software en producción, agrupadas por la capa donde viven.",
+    "ai": "IA",
+    "cloud": "Cloud"
+  },
+  "aboutExtra": {
+    "lede": "De soporte en AS/400 a agentes de IA en la nube: una carrera construida entregando.",
+    "showMore": "Ver más",
+    "showLess": "Ver menos",
+    "current": "Actual"
+  },
+  "projectsExtra": {
+    "lede": "Sistemas que diseñé y llevé a producción, desde pagos en cripto hasta reportes con IA.",
+    "range": "IA, pagos y plataformas. Desarrollo de principio a fin.",
+    "concept": "Ilustración conceptual",
+    "spotlight": "En detalle",
+    "details": "Explorar el desarrollo",
+    "stack": "Tecnologías utilizadas",
+    "visit": "Visitar sitio",
+    "footer": "Más código, experimentos y proyectos que construyo.",
+    "categories": {
+      "ai": "IA generativa / Cloud",
+      "fintech": "Fintech / Cripto",
+      "ml": "Machine learning / Retail",
+      "commerce": "E-commerce / Gaming",
+      "platform": "Plataformas / Integraciones",
+      "enterprise": "Empresarial / Full stack"
+    },
+    "items": {
+      "aiReports": {
+        "title": "De los datos al reporte.",
+        "summary": "Un sistema de reportes automatizados que conecta datos de negocio con IA generativa, construido sobre Google Cloud.",
+        "alt": "Concepto de un espacio de reportes que conecta BigQuery, Gemini y un documento generado automáticamente."
+      },
+      "bitcoinATM": {
+        "title": "Bitcoin, al alcance de todos.",
+        "summary": "Software tipo cajero que lleva las transacciones con criptomonedas a un flujo familiar, integrado con CoinPayments.",
+        "alt": "Concepto de un cajero Bitcoin con interfaz de transacciones y servicios de pago conectados."
+      },
+      "aiRetail": {
+        "title": "Una tienda que te entiende.",
+        "summary": "“Just for You”: un módulo de recomendaciones para retail que conecta modelos de machine learning con una experiencia de compra personalizada.",
+        "alt": "Concepto de recomendaciones personalizadas conectadas a un modelo de machine learning."
+      },
+      "digitalGames": {
+        "title": "PopularKeys",
+        "summary": "Un marketplace moderno de claves digitales que conecta el catálogo de Kinguin con búsqueda, wallet y múltiples flujos de pago.",
+        "alt": "Concepto del marketplace PopularKeys con portadas abstractas de juegos y proceso de pago."
+      },
+      "smmPlatform": {
+        "title": "1popularity",
+        "summary": "Una plataforma para promocionar y gestionar servicios SMM, conectando proveedores, pedidos y pasarelas de pago.",
+        "alt": "Concepto del panel de gestión de servicios de 1popularity y sus integraciones con proveedores."
+      },
+      "enterpriseProjects": {
+        "title": "Los sistemas detrás del negocio.",
+        "summary": "Desarrollo y soporte de aplicaciones empresariales: interfaces, lógica de negocio, bases de datos e integraciones.",
+        "alt": "Concepto de arquitectura empresarial conectada desde Angular y MVC hasta .NET y SQL."
+      }
     }
+  },
+  "cta": {
+    "title": "¿Tienes un proceso que un agente podría resolver?",
+    "body": "Diseño e implemento agentes, integraciones y plataformas cloud listas para producción. Cuéntame el contexto y conversemos sobre la mejor forma de abordarlo.",
+    "primary": "Hablemos de tu proyecto",
+    "secondary": "Preguntar al agente"
   }
 }

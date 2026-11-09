@@ -2,13 +2,13 @@ import { config } from '../config';
 
 declare global {
   interface Window {
-    gtag?: (command: string, ...args: any[]) => void;
+    gtag?: (command: string, ...args: unknown[]) => void;
   }
 }
 
 export const trackEvent = (
   eventName: string,
-  eventParams?: Record<string, any>
+  eventParams?: Record<string, unknown>
 ): void => {
   if (config.isProduction && window.gtag) {
     window.gtag('event', eventName, eventParams);
@@ -25,7 +25,7 @@ export const trackPageView = (path: string): void => {
   }
 };
 
-export const trackError = (error: Error, errorInfo?: any): void => {
+export const trackError = (error: Error, errorInfo?: Record<string, unknown>): void => {
   if (config.isProduction && window.gtag) {
     window.gtag('event', 'exception', {
       description: error.message,

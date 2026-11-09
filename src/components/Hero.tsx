@@ -1,17 +1,108 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowDown } from 'lucide-react';
+import { ArrowUp, FileDown, Sparkles } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 import AnimatedScreens from './AnimatedScreens';
-import ScrollEffect from './ScrollEffect';
-import i18n from '../i18n';
+import TechIcon from './TechIcon';
+import { MARQUEE } from '../data/tech';
+import { askAgent, prefersReducedMotion } from '../hooks/useSpotlight';
+
+/** Prompt box whose placeholder types out real questions, then hands them to the assistant. */
+const AskBar: React.FC = () => {
+  const { t, i18n } = useTranslation();
+  const questions = t('hero.questions', { returnObjects: true }) as string[];
+  const [value, setValue] = useState('');
+  const [typed, setTyped] = useState('');
+  const [focused, setFocused] = useState(false);
+
+  useEffect(() => {
+    if (!Array.isArray(questions) || questions.length === 0) return;
+    if (prefersReducedMotion()) {
+      setTyped(questions[0]);
+      return;
+    }
+    let q = 0;
+    let i = 0;
+    let deleting = false;
+    let timer: number;
+    const tick = () => {
+      const full = questions[q];
+      if (!deleting) {
+        i++;
+        setTyped(full.slice(0, i));
+        if (i === full.length) {
+          deleting = true;
+          timer = window.setTimeout(tick, 2200);
+          return;
+        }
+        timer = window.setTimeout(tick, 45 + Math.random() * 40);
+      } else {
+        i -= 2;
+        setTyped(full.slice(0, Math.max(i, 0)));
+        if (i <= 0) {
+          deleting = false;
+          q = (q + 1) % questions.length;
+          timer = window.setTimeout(tick, 400);
+          return;
+        }
+        timer = window.setTimeout(tick, 18);
+      }
+    };
+    timer = window.setTimeout(tick, 900);
+    return () => window.clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i18n.language]);
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = value.trim() || typed;
+    if (!q) return;
+    askAgent(q);
+    setValue('');
+  };
+
+  return (
+    <form onSubmit={submit} className="border-beam group mt-2.5 rounded-2xl" aria-label={t('hero.askLabel')}>
+      <div className="relative flex items-center gap-3 rounded-2xl border border-white/10 bg-night-800/80 p-2 pl-4 shadow-[0_20px_80px_-20px_rgba(139,92,246,.5)] backdrop-blur-xl">
+        <Sparkles size={18} className="shrink-0 text-glow" aria-hidden="true" />
+        <label htmlFor="hero-ask" className="sr-only">
+          {t('hero.askLabel')}
+        </label>
+        <div className="relative min-w-0 flex-1">
+          <input
+            id="hero-ask"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            autoComplete="off"
+            className="w-full border-0 bg-transparent p-0 py-2 text-[15px] text-white placeholder-transparent focus:ring-0"
+            placeholder={t('hero.askLabel')}
+          />
+          {!value && (
+            <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 flex items-center truncate text-[15px] text-text-muted">
+              {focused ? t('hero.askLabel') : typed}
+              <span className="ml-0.5 inline-block h-4 w-[2px] animate-caret bg-glow" />
+            </span>
+          )}
+        </div>
+        <button
+          type="submit"
+          aria-label={t('hero.askButton')}
+          className="flex min-h-[40px] shrink-0 items-center gap-1.5 rounded-xl bg-white px-3.5 py-2 text-sm font-medium text-night-950 transition-transform hover:scale-[1.03]"
+        >
+          <span className="hidden sm:inline">{t('hero.askButton')}</span>
+          <ArrowUp size={16} aria-hidden="true" />
+        </button>
+      </div>
+    </form>
+  );
+};
 
 const Hero: React.FC = () => {
-  const { t } = useTranslation();
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
+  const { t, i18n } = useTranslation();
   const pcLayerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [isScrollEffectVisible, setIsScrollEffectVisible] = useState(false);
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < 640);
@@ -20,231 +111,144 @@ const Hero: React.FC = () => {
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  // Initialize starry background
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // Set canvas dimensions
-    const setCanvasDimensions = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    // Handle resize
-    window.addEventListener('resize', setCanvasDimensions);
-    setCanvasDimensions();
-
-    // Star properties
-    interface Star {
-      x: number;
-      y: number;
-      radius: number;
-      opacity: number;
-      speed: number;
-      animationOffset: number;
-    }
-
-    // Create stars
-    const stars: Star[] = [];
-    const starCount = Math.floor(canvas.width * canvas.height / 2000);
-    
-    for (let i = 0; i < starCount; i++) {
-      stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 1.5 + 0.5,
-        opacity: Math.random() * 0.8 + 0.2,
-        speed: Math.random() * 0.05 + 0.01,
-        animationOffset: Math.random() * Math.PI * 2,
-      });
-    }
-
-    // Animation function
-    let animationFrameId: number;
-    
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      // Update and draw stars
-      const time = Date.now() / 1000;
-      
-      stars.forEach(star => {
-        // Calculate animation based on time and offset
-        const opacity = star.opacity * (0.5 + 0.5 * Math.sin(time + star.animationOffset));
-        
-        // Draw star
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-        ctx.fill();
-        
-        // Move star
-        star.y += star.speed;
-        
-        // Reset position if off screen
-        if (star.y > canvas.height) {
-          star.y = 0;
-          star.x = Math.random() * canvas.width;
-        }
-      });
-      
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      window.removeEventListener('resize', setCanvasDimensions);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-
-  // Activate scroll effect after a delay
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsScrollEffectVisible(true);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Parallax effect
+  // Parallax on the workstation illustration
   useEffect(() => {
     const pcLayer = pcLayerRef.current;
-    if (!pcLayer || 'ontouchstart' in window) return;
-
-    let targetX = 0, targetY = 0;
-    let currentX = 0, currentY = 0;
-    let rafId: number;
-
-    const onMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 30;
-      const y = (e.clientY / window.innerHeight - 0.5) * 20;
-      targetX = x;
-      targetY = y;
+    if (!pcLayer || 'ontouchstart' in window || prefersReducedMotion()) return;
+    let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+    const onMove = (e: MouseEvent) => {
+      tx = (e.clientX / window.innerWidth - 0.5) * 16;
+      ty = (e.clientY / window.innerHeight - 0.5) * 10;
     };
-
-    const animate = () => {
-      const dx = (targetX - currentX) * 0.1;
-      const dy = (targetY - currentY) * 0.1;
-      
-      currentX += dx;
-      currentY += dy;
-      
-      pcLayer.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
-      rafId = requestAnimationFrame(animate);
+    const loop = () => {
+      cx += (tx - cx) * 0.08;
+      cy += (ty - cy) * 0.08;
+      pcLayer.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+      raf = requestAnimationFrame(loop);
     };
-
-    window.addEventListener('mousemove', onMouseMove);
-    rafId = requestAnimationFrame(animate);
-
+    window.addEventListener('mousemove', onMove);
+    raf = requestAnimationFrame(loop);
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-      cancelAnimationFrame(rafId);
+      window.removeEventListener('mousemove', onMove);
+      cancelAnimationFrame(raf);
     };
   }, []);
 
+  const cvHref = i18n.language?.startsWith('es') ? '/cv-es.pdf' : '/cv-en.pdf';
+  const enter = (delay: number) => ({
+    // transform-only entrance: text is painted on the first frame, so it never delays LCP
+    initial: { y: 14 },
+    animate: { y: 0 },
+    transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
+  });
+
   return (
-    <section 
-      id="home"
-      ref={sectionRef}
-      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-bg-secondary to-bg-primary pt-16 perspective-1000"
-    >
-      {/* Stars canvas */}
-      <canvas ref={canvasRef} className="absolute inset-0 -z-10"></canvas>
-      
-      {/* Video Background - Commented out: video file not present
-      <video
-        ref={videoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute w-full h-full object-cover opacity-30 mix-blend-screen"
-        style={{
-          clipPath: `polygon(
-            42% 15%, 58% 15%,
-            58% 35%, 42% 35%,
-            42% 45%, 58% 45%,
-            58% 65%, 42% 65%,
-            42% 75%, 58% 75%,
-            58% 95%, 42% 95%
-          )`,
-        }}
-      >
-        <source src="/assets/code-loop.mp4" type="video/mp4" />
-      </video>
-      */}
-      
-      {/* Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12 flex flex-col lg:flex-row items-center justify-between py-8 sm:py-16">
-        <div className="max-w-xl content z-10 text-center lg:text-left">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white">
-            {t('hero.name')}&nbsp;
-            <span className="text-gradient">
-              {t('hero.lastName')}
-            </span>
-            <br /> {t('hero.title')}
-          </h1>
-          <p className="mt-4 sm:mt-6 text-base sm:text-lg text-slate-300">
+    <section id="home" className="relative isolate flex min-h-screen flex-col overflow-hidden pt-28">
+      {/* Sky: violet dusk fading into the page */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_90%_70%_at_72%_22%,rgba(42,29,87,.9)_0%,rgba(18,10,42,.55)_45%,transparent_80%)]" />
+      <div aria-hidden="true" className="absolute -right-40 top-1/3 -z-10 h-[520px] w-[520px] rounded-full bg-glow/[0.07] blur-[120px]" />
+
+      <div className="container mx-auto flex flex-1 flex-col items-center gap-12 px-5 sm:px-6 lg:flex-row lg:justify-between lg:gap-8 lg:px-12">
+        <div className="w-full max-w-xl shrink-0 text-left lg:max-w-[540px]">
+          <motion.a
+            {...enter(0)}
+            href="#contact"
+            className="inline-flex items-center gap-2.5 rounded-full border border-leaf/25 bg-leaf/[0.07] py-1 pl-2 pr-3.5 text-sm text-leaf"
+          >
+            <span className="h-2 w-2 animate-pulse-dot rounded-full bg-leaf" />
+            {t('hero.available')}
+          </motion.a>
+
+          <motion.h1
+            {...enter(0.06)}
+            className="mt-6 font-display text-[clamp(3.25rem,8.6vw,6.5rem)] font-extrabold leading-[0.9] tracking-[-0.04em] text-white"
+          >
+            {t('hero.name')}
+            <br />
+            {t('hero.lastName')}
+          </motion.h1>
+
+          <motion.p {...enter(0.12)} className="mt-6 font-display text-xl font-semibold tracking-tight text-glow sm:text-2xl">
+            {t('hero.role')}
+          </motion.p>
+          <motion.p {...enter(0.16)} className="mt-1.5 text-balance font-display text-2xl font-semibold leading-tight text-white sm:text-[1.75rem]">
+            {t('hero.tagline')}
+          </motion.p>
+
+          <motion.p {...enter(0.22)} className="mt-4 max-w-[34rem] text-base leading-relaxed text-text-muted sm:text-[1.0625rem]">
             {t('hero.description')}
-          </p>
-          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <a 
-              href={i18n.language === 'es' ? '/cv-es.pdf' : '/cv-en.pdf'} 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary group w-full sm:w-auto"
-            >
-              {t('hero.downloadCV')}
-            </a>
-            <a 
-              href="#projects"
-              className="btn-secondary w-full sm:w-auto"
-            >
+          </motion.p>
+
+          <motion.div {...enter(0.28)} className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#projects" className="btn-primary">
               {t('hero.viewProjects')}
             </a>
-          </div>
+            <a href={cvHref} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+              <FileDown size={17} aria-hidden="true" />
+              {t('hero.downloadCV')}
+            </a>
+          </motion.div>
+
+          <motion.div {...enter(0.36)} className="mt-8">
+            <p className="text-sm text-text-muted">{t('hero.askHint')}</p>
+            <AskBar />
+          </motion.div>
         </div>
 
-        {/* PC Layer with Parallax */}
-        <div 
-          ref={pcLayerRef}
-          className="block w-full max-w-[620px] mt-8 sm:mt-12 lg:mt-0 parallax-layer will-change-transform transition-transform duration-200 ease-out"
+        {/* Workstation illustration with parallax */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full max-w-[680px] lg:-mr-10 lg:max-w-none lg:flex-1 xl:-mr-20"
         >
-          <div className="relative w-full aspect-[620/400]">
-            <img 
-              src="/assets/index.png"
-              alt="Developer workspace at night"
-              className="w-full h-auto object-cover pointer-events-none select-none"
-              draggable="false"
-            />
-            <AnimatedScreens isMobile={isMobile} />
-            
-            {/* Scroll Effect Overlay */}
-            <div className="absolute inset-0 pointer-events-none">
-              <ScrollEffect isVisible={isScrollEffectVisible} />
+          <div ref={pcLayerRef} className="parallax-layer">
+            <div className="relative aspect-[1026/513] w-full [mask-image:linear-gradient(to_bottom,#000_88%,transparent_100%)]">
+              {/* light spilling from the monitors */}
+              <div aria-hidden="true" className="absolute left-[28%] top-[-6%] h-[62%] w-[52%] animate-screen-breathe rounded-full bg-[radial-gradient(closest-side,rgba(94,234,212,.22),rgba(139,92,246,.12)_55%,transparent)] blur-2xl" />
+              <picture>
+                <source srcSet="/assets/index.webp" type="image/webp" />
+                <img
+                  src="/assets/index.png"
+                  width={1026}
+                  height={513}
+                  fetchPriority="high"
+                  decoding="async"
+                  alt={i18n.language?.startsWith('es') ? 'Desarrollador programando de noche frente a tres monitores' : 'Developer coding at night in front of three monitors'}
+                  className="pointer-events-none relative h-full w-full select-none"
+                  draggable="false"
+                />
+              </picture>
+              <AnimatedScreens isMobile={isMobile} />
+              {/* silhouette + bezels redrawn above the live screens */}
+              <picture>
+                <source srcSet="/assets/index-fg.webp" type="image/webp" />
+                <img src="/assets/index-fg.png" width={1026} height={513} alt="" aria-hidden="true" decoding="async" className="pointer-events-none absolute inset-0 h-full w-full select-none" draggable="false" />
+              </picture>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Stack marquee */}
+      <div className="relative mt-12 border-y border-white/[0.06] bg-night-950/60 py-5">
+        <div className="container mx-auto flex items-center gap-6 px-5 lg:px-12">
+          <span className="hidden shrink-0 text-sm text-text-muted md:block">{t('hero.clouds')}</span>
+          <div className="marquee-mask relative flex-1 overflow-hidden">
+            <div className="flex w-max animate-marquee gap-10 hover:[animation-play-state:paused]">
+              {[...MARQUEE, ...MARQUEE].map((tech, i) => (
+                <span key={`${tech.name}-${i}`} className="flex items-center gap-2.5 whitespace-nowrap text-sm text-white/70" aria-hidden={i >= MARQUEE.length}>
+                  <TechIcon name={tech.name} icon={tech.icon} size={20} />
+                  {tech.name}
+                </span>
+              ))}
             </div>
           </div>
         </div>
       </div>
-      
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-0 right-0 flex justify-center">
-        <a 
-          href="#about" 
-          className="flex flex-col items-center text-text-muted hover:text-text-main transition-colors duration-300"
-        >
-          <span className="mb-2 text-sm">{t('hero.scrollDown')}</span>
-          <ArrowDown className="animate-bounce" size={20} />
-        </a>
-      </div>
+
     </section>
   );
 };
 
-export default Hero; 
+export default Hero;
